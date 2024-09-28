@@ -28,7 +28,7 @@ class CustomerAuthController extends Controller
             } else {
                 // Logout jika user bukan customer
                 Auth::logout();
-                return redirect()->back()->withErrors(['email' => 'Anda bukan customer.']);
+                return redirect()->back()->withErrors(['email' => 'Login gagal, cek email dan password Anda.']);
             }
         }
 

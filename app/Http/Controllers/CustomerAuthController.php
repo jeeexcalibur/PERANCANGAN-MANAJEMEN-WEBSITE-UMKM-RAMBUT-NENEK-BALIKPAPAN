@@ -22,7 +22,7 @@ class CustomerAuthController extends Controller
             $user = Auth::user();
             
             // Periksa role user
-            if ($user->role === 'USER') {
+            if ($user->role === 'USER' || 'Super ADMIN' || 'Admin') {
                 // Redirect ke dashboard customer
                 return redirect()->intended('/customer/dashboard');
             } else {

@@ -4,6 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\CustomerRegisterController;
 use App\Http\Controllers\CustomerDashboardController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Livewire\ListRevenues;
+use App\Http\Controllers\RevenueController; 
 
 Route::get('/customer/login', [CustomerAuthController::class, 'showLoginForm'])->name('customer.login');
 Route::post('/customer/login', [CustomerAuthController::class, 'login']);
@@ -12,11 +20,24 @@ Route::post('/customer/logout', [CustomerAuthController::class, 'logout'])->name
 Route::get('/customer/register', [CustomerRegisterController::class, 'showRegistrationForm'])->name('customer.register');
 Route::post('/customer/register', [CustomerRegisterController::class, 'register']);
 
-Route::middleware('auth')->group(function () {
-    Route::get('/customer/dashboard', [CustomerDashboardController::class, 'index'])->name('customer.dashboard');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/add/{productId}', [CartController::class, 'add'])->name('cart.add');
+    Route::put('/cart/update/{cartId}', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/remove/{cartId}', [CartController::class, 'remove'])->name('cart.remove');
 });
 
-// Halaman dashboard customer (setelah login)
-Route::get('/customer/dashboard', function () {
-    return view('customer.dashboard');
-})->middleware('auth');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::middleware(['auth'])->group(function () {
+    // ... route keranjang
+
+    Route::get('/checkout', [CheckoutController::class, 'showCheckoutForm'])->name('checkout');
+    Route::post('/checkout', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
+});
+
+Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+
+Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+Route::get('/revenues/export', [RevenueController::class, 'export'])->name('revenues.export');

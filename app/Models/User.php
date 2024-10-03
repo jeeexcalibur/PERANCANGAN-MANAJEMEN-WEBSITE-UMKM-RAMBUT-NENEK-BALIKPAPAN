@@ -21,7 +21,7 @@ class User extends Authenticatable implements FilamentUser
     const ROLES = [
         self::ROLE_SUPERADMIN => 'Super Admin',
         self::ROLE_ADMIN => 'Admin',
-        self::ROLE_USER => 'Customer',
+        self::ROLE_USER => 'User',
     ];
 
     public function canAccessPanel(Panel $panel): bool

@@ -16,6 +16,7 @@ class Transaction extends Model
         'payment_method',
         'status',
         'payment_proof',
+        'shipping_address',
     ];
 
     public function user()
@@ -26,5 +27,10 @@ class Transaction extends Model
     public function items()
     {
         return $this->hasMany(TransactionItem::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
     }
 }

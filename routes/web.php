@@ -12,6 +12,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Livewire\ListRevenues;
 use App\Http\Controllers\RevenueController; 
+use App\Http\Controllers\ProductController; 
 
 Route::get('/customer/login', [CustomerAuthController::class, 'showLoginForm'])->name('customer.login');
 Route::post('/customer/login', [CustomerAuthController::class, 'login']);
@@ -41,3 +42,5 @@ Route::get('/transactions', [TransactionController::class, 'index'])->name('tran
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 Route::get('/revenues/export', [RevenueController::class, 'export'])->name('revenues.export');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');

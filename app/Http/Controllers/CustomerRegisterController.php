@@ -34,12 +34,12 @@ class CustomerRegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'customer', // Set role sebagai customer
+            'role' => 'USER', // Set role sebagai customer
         ]);
 
         // Login user setelah registrasi
         Auth::login($user);
 
-        return redirect('/customer/dashboard');
+        return redirect('/');
     }
 }

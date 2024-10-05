@@ -14,6 +14,8 @@ use Illuminate\Support\Str;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\FileUpload;
 use Illuminate\Validation\Rule;
+use Illuminate\Database\Eloquent\Builder;;
+use App\Filament\Widgets\ProductStatsOverview;
 
 
 
@@ -26,28 +28,39 @@ class ProductResource extends Resource
     protected static ?string $pluralLabel = 'Produk';
     protected static ?string $label = 'Produk';
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                    Forms\Components\FileUpload::make('image')
-                    ->required()
-                    ->image()
-                    ->disk('public')
-                    ->columnSpanFull(),
-                    Forms\Components\Textarea::make('description')
-                    ->required(),
-                    Forms\Components\TextInput::make('stock')
-                    ->required()
-                    ->numeric(),
-                    Forms\Components\TextInput::make('price')
-                    ->required()
-                    ->numeric()
-            ]);
-    }
+    // app/Filament/Resources/ProductResource.php
+public static function form(Form $form): Form
+{
+    return $form
+        ->schema([
+            Forms\Components\TextInput::make('name')
+                ->required()
+                ->maxLength(255),
+            Forms\Components\FileUpload::make('image')
+                ->required()
+                ->image()
+                ->disk('public')
+                ->columnSpanFull(),
+            Forms\Components\Textarea::make('description')
+                ->required(),
+            Forms\Components\TextInput::make('stock')
+                ->required()
+                ->numeric(),
+            Forms\Components\TextInput::make('price')
+                ->required()
+                ->numeric(),
+            Forms\Components\TextInput::make('discount_percentage') // Tambahkan diskon
+                ->label('Persentase Diskon (%)')
+                ->numeric()
+                ->default(0), // default 0
+            Forms\Components\DatePicker::make('start_date')
+                ->label('Tanggal Mulai Diskon')
+                ->nullable(),
+            Forms\Components\DatePicker::make('end_date')
+                ->label('Tanggal Berakhir Diskon')
+                ->nullable(),
+        ]);
+}
 
     public static function table(Table $table): Table
     {
@@ -60,6 +73,8 @@ class ProductResource extends Resource
                     ->height(50),
                     Tables\Columns\TextColumn::make('price')
                     ->money('idr', true)
+                    ->sortable(),
+                    Tables\Columns\TextColumn::make('discount_percentage')
                     ->sortable(),
                     Tables\Columns\TextColumn::make('stock')
                     ->sortable(),
@@ -86,6 +101,13 @@ class ProductResource extends Resource
             'index' => Pages\ListProducts::route('/'),
             'create' => Pages\CreateProduct::route('/create'),
             'edit' => Pages\EditProduct::route('/{record}/edit'),
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            ProductStatsOverview::class,
         ];
     }
 }

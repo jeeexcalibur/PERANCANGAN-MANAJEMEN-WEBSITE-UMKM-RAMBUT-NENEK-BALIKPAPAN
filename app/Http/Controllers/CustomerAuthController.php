@@ -24,7 +24,7 @@ class CustomerAuthController extends Controller
             // Periksa role user
             if ($user->role === 'USER' || 'Super ADMIN' || 'Admin') {
                 // Redirect ke dashboard customer
-                return redirect()->intended('/customer/dashboard');
+                return redirect()->intended('/');
             } else {
                 // Logout jika user bukan customer
                 Auth::logout();
@@ -39,7 +39,7 @@ class CustomerAuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/customer/login');
+        return redirect('/');
     }
 }
 

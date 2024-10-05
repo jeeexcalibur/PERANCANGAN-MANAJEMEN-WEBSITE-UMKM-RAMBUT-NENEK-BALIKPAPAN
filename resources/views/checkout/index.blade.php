@@ -52,7 +52,10 @@
                 <span class="text-red-500 text-sm">{{ $message }}</span>
             @enderror
         </div>
-
+        <div>
+            <label for="shipping_address">Alamat Pengiriman</label> <br>
+            <textarea id="shipping_address" name="shipping_address" required rows="4" placeholder="Masukkan alamat pengiriman"></textarea>
+        </div>
         <div class="mb-4">
             <label for="payment_proof" class="block text-gray-700">Bukti Pembayaran</label>
             <input type="file" name="payment_proof" id="payment_proof" accept="image/*" required class="w-full border rounded p-2 mt-2">

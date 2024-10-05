@@ -17,14 +17,16 @@
         </thead>
         <tbody>
             @foreach ($transactions as $transaction)
-            <tr>
-                <td class="border px-4 py-2">{{ $transaction->id }}</td>
-                <td class="border px-4 py-2">{{ $transaction->product_name }}</td>
-                <td class="border px-4 py-2">{{ $transaction->quantity }}</td>
-                <td class="border px-4 py-2">{{ $transaction->total_price }}</td>
-                <td class="border px-4 py-2">{{ $transaction->status }}</td>
-                <td class="border px-4 py-2">{{ $transaction->created_at }}</td>
-            </tr>
+                @foreach ($transaction->items as $item) <!-- Loop melalui setiap item dalam transaksi -->
+                    <tr>
+                        <td class="border px-4 py-2">{{ $transaction->id }}</td>
+                        <td class="border px-4 py-2">{{ $item->product->name }}</td> <!-- Akses nama produk dari item -->
+                        <td class="border px-4 py-2">{{ $item->quantity }}</td> <!-- Akses jumlah dari item -->
+                        <td class="border px-4 py-2">Rp {{ number_format($transaction->total, 2, ',', '.') }}</td> <!-- Format total harga -->
+                        <td class="border px-4 py-2">{{ $transaction->status }}</td>
+                        <td class="border px-4 py-2">{{ $transaction->created_at }}</td>
+                    </tr>
+                @endforeach
             @endforeach
         </tbody>
     </table>

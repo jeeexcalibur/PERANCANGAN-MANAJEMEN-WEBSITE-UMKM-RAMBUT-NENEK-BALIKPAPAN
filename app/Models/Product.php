@@ -15,5 +15,8 @@ class Product extends Model
         'description',
         'stock',
         'price',
+        'discount_percentage', // tambahkan kolom diskon
+        'start_date', // tanggal mulai diskon
+        'end_date', // tanggal berakhir diskon
     ];
 }

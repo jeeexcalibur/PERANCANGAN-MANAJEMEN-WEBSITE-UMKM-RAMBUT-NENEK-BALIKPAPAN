@@ -17,24 +17,35 @@ class CartController extends Controller
 
     public function add(Request $request, $productId)
     {
+        // Validasi input quantity
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
+    
         $product = Product::findOrFail($productId);
-
+    
         if ($product->stock < 1) {
             return redirect()->back()->with('error', 'Produk sedang kosong.');
         }
-
+    
+        // Ambil quantity dari input
+        $quantity = $request->input('quantity');
+    
+        // Cek apakah produk sudah ada di keranjang
         $cart = Cart::firstOrCreate(
             ['user_id' => Auth::id(), 'product_id' => $productId],
-            ['quantity' => 1]
+            ['quantity' => $quantity] // Simpan quantity dari input
         );
-
+    
+        // Jika produk sudah ada, tambahkan quantity
         if (!$cart->wasRecentlyCreated) {
-            $cart->quantity += 1;
+            $cart->quantity += $quantity; // Tambahkan quantity dari input
             $cart->save();
         }
-
+    
         return redirect()->back()->with('success', 'Produk ditambahkan ke keranjang.');
     }
+    
 
     public function update(Request $request, $cartId)
     {

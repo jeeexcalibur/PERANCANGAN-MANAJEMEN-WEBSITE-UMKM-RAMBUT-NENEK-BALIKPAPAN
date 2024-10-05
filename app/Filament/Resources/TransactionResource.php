@@ -10,6 +10,8 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
+
 
 class TransactionResource extends Resource
 {
@@ -27,41 +29,53 @@ class TransactionResource extends Resource
                 Forms\Components\Select::make('status')
                     ->options([
                         'Diproses' => 'Diproses',  // Tampilkan 'Diproses' untuk opsi status
-                        'Dikirim' => 'Dikirim',      // Tampilkan 'Dikirim' untuk opsi status
-                        'Diterima' => 'Diterima',    // Tampilkan 'Diterima' untuk opsi status
+                        'Dikirim' => 'Dikirim',    // Tampilkan 'Dikirim' untuk opsi status
+                        'Diterima' => 'Diterima',  // Tampilkan 'Diterima' untuk opsi status
                     ])
                     ->required(),
+                    Forms\Components\TextArea::make('shipping_address')
+                    ->label('Alamat Pengiriman')
+                    ->maxLength(255)
+                    ->rows(4),
             ]);
     }
-    
 
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->label('Transaksi #')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('user.name')
-                    ->label('Pelanggan')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('total')
-                    ->money('idr', true)
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->label('Status')
-                    ->sortable()
-                    ->formatStateUsing(fn ($state) => ucfirst($state)) // Untuk kapitalisasi status
-                    ->color(fn ($record) => match ($record->status) {
-                        'Diproses' => 'warning',
-                        'Dikirim' => 'info',
-                        'Diterima' => 'success',
-                        default => 'default', // Warna default jika tidak ada kecocokan
-                    }),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable(),
-            ])
+        ->columns([
+            Tables\Columns\TextColumn::make('id')
+                ->label('Transaksi #')
+                ->sortable(),
+            Tables\Columns\TextColumn::make('user.name')
+                ->label('Pelanggan')
+                ->searchable(),
+            Tables\Columns\TextColumn::make('shipping_address')
+                ->label('Alamat Pengiriman')
+                ->formatStateUsing(fn($state) => Str::limit($state, 20)) // Tampilkan 20 karakter pertama
+                ->tooltip(fn($record) => $record->shipping_address), // Menampilkan tooltip dengan alamat lengkap saat hover
+            Tables\Columns\TextColumn::make('total')
+                ->money('idr', true)
+                ->sortable(),
+            Tables\Columns\TextColumn::make('status')
+                ->label('Status')
+                ->sortable()
+                ->formatStateUsing(fn ($state) => ucfirst($state)) // Untuk kapitalisasi status
+                ->color(fn ($record) => match ($record->status) {
+                    'Diproses' => 'warning',
+                    'Dikirim' => 'info',
+                    'Diterima' => 'success',
+                    default => 'default', // Warna default jika tidak ada kecocokan
+                }),
+            Tables\Columns\TextColumn::make('payment_proof') 
+                ->label('Bukti Pembayaran')
+                ->formatStateUsing(fn ($state) => $state ? '<a href="' . asset('storage/' . $state) . '" target="_blank">Lihat Bukti</a>' : 'Tidak ada bukti')
+                ->html(), // Gunakan html() untuk mengizinkan rendering link HTML
+            Tables\Columns\TextColumn::make('created_at')
+                ->label('Ordered At')
+                ->dateTime()
+                ->sortable(),
+        ])
             ->filters([
                 Tables\Filters\Filter::make('date')
                     ->form([

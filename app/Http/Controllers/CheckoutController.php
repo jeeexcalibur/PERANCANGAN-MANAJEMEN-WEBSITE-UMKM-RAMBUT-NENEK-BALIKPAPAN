@@ -51,7 +51,8 @@ class CheckoutController extends Controller
             'user_id' => Auth::id(),
             'total' => $total,
             'payment_method' => $request->payment_method,
-            'payment_proof' => $paymentProofPath ?? null,
+            'payment_proof' => $paymentProofPath,
+            'shipping_address' => $request->shipping_address, // Simpan alamat pengiriman
             'status' => 'Diproses',
         ]);
 

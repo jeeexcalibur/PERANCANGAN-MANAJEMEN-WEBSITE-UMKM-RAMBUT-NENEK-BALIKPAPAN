@@ -15,6 +15,9 @@ return new class extends Migration
             $table->text('description');
             $table->integer('stock');
             $table->decimal('price', 10, 2);
+            $table->decimal('discount_percentage', 5, 2)->default(0); // kolom diskon
+            $table->date('start_date')->nullable(); // tanggal mulai diskon
+            $table->date('end_date')->nullable(); // tanggal berakhir diskon
             $table->timestamps();
         });
     }

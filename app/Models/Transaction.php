@@ -17,6 +17,7 @@ class Transaction extends Model
         'status',
         'payment_proof',
         'shipping_address',
+        'phone',
     ];
 
     public function user()

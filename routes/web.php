@@ -44,3 +44,4 @@ Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
 Route::get('/revenues/export', [RevenueController::class, 'export'])->name('revenues.export');
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');

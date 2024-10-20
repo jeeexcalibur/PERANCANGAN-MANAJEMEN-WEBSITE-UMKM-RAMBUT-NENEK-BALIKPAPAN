@@ -1,16 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login & Register Customer</title>
-
-    <!-- Tambahkan Tailwind CSS dan Flowbite -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://unpkg.com/flowbite@1.5.0/dist/flowbite.min.js"></script>
-
-    <!-- Tambahkan SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        /* CSS yang digabung */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #c9d6ff;
+            background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+            position: relative;
+            overflow: hidden;
+            width: 768px;
+            max-width: 100%;
+            min-height: 480px;
+        }
+
+        .container p {
+            font-size: 14px;
+            line-height: 20px;
+            letter-spacing: 0.3px;
+            margin: 20px 0;
+        }
+
+        .container span {
+            font-size: 12px;
+        }
+
+        .container a {
+            color: #333;
+            font-size: 13px;
+            text-decoration: none;
+            margin: 15px 0 10px;
+        }
+
+        .container button {
+            background-color: #512da8;
+            color: #fff;
+            font-size: 12px;
+            padding: 10px 45px;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .container button.hidden {
+            background-color: transparent;
+            border-color: #fff;
+        }
+
+        .container form {
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 40px;
+            height: 100%;
+        }
+
+        .container input {
+            background-color: #eee;
+            border: none;
+            margin: 8px 0;
+            padding: 10px 15px;
+            font-size: 13px;
+            border-radius: 8px;
+            width: 100%;
+            outline: none;
+        }
+
+        .form-container {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            transition: all 0.6s ease-in-out;
+        }
+
+        .sign-in {
+            left: 0;
+            width: 50%;
+            z-index: 2;
+        }
+
+        .container.active .sign-in {
+            transform: translateX(100%);
+        }
+
+        .sign-up {
+            left: 0;
+            width: 50%;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .container.active .sign-up {
+            transform: translateX(100%);
+            opacity: 1;
+            z-index: 5;
+            animation: move 0.6s;
+        }
+
+        @keyframes move {
+            0%,
+            49.99% {
+                opacity: 0;
+                z-index: 1;
+            }
+
+            50%,
+            100% {
+                opacity: 1;
+                z-index: 5;
+            }
+        }
+
+        .social-icons {
+            margin: 20px 0;
+        }
+
+        .social-icons a {
+            border: 1px solid #ccc;
+            border-radius: 20%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 3px;
+            width: 40px;
+            height: 40px;
+        }
+
+        .toggle-container {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            transition: all 0.6s ease-in-out;
+            border-radius: 150px 0 0 100px;
+            z-index: 1000;
+        }
+
+        .container.active .toggle-container {
+            transform: translateX(-100%);
+            border-radius: 0 150px 100px 0;
+        }
+
+        .toggle {
+            background-color: #512da8;
+            height: 100%;
+            background: linear-gradient(to right, #5c6bc0, #512da8);
+            color: #fff;
+            position: relative;
+            left: -100%;
+            height: 100%;
+            width: 200%;
+            transform: translateX(0);
+            transition: all 0.6s ease-in-out;
+        }
+
+        .container.active .toggle {
+            transform: translateX(50%);
+        }
+
+        .toggle-panel {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 30px;
+            text-align: center;
+            top: 0;
+            transform: translateX(0);
+            transition: all 0.6s ease-in-out;
+        }
+
+        .toggle-left {
+            transform: translateX(-200%);
+        }
+
+        .container.active .toggle-left {
+            transform: translateX(0);
+        }
+
+        .toggle-right {
+            right: 0;
+            transform: translateX(0);
+        }
+
+        .container.active .toggle-right {
+            transform: translateX(200%);
+        }
+    </style>
 
     <script>
         // SweetAlert untuk menampilkan error
@@ -18,7 +232,7 @@
             window.onload = function() {
                 Swal.fire({
                     title: 'Error!',
-                    html: 
+                    html:
                         '<ul>' +
                         @foreach ($errors->all() as $error)
                             '<li>{{ $error }}</li>' +
@@ -32,121 +246,67 @@
 
         // Function untuk switch form login & register
         function toggleForm(formType) {
-            const loginForm = document.getElementById('loginForm');
-            const registerForm = document.getElementById('registerForm');
-            
+            const container = document.getElementById('container');
             if (formType === 'login') {
-                loginForm.classList.remove('hidden');
-                loginForm.classList.add('animate__fadeIn');
-                registerForm.classList.add('hidden');
+                container.classList.remove('active');
             } else {
-                registerForm.classList.remove('hidden');
-                registerForm.classList.add('animate__fadeIn');
-                loginForm.classList.add('hidden');
+                container.classList.add('active');
             }
         }
     </script>
-
-    <!-- Tambahkan animasi dengan Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 </head>
-<body class="bg-gray-100">
-    <div class="w-full h-screen flex">
-        <!-- Kolom kiri untuk form login/register -->
-        <div class="w-5/12 bg-white flex justify-center items-center">
-            <div class="p-8 rounded-lg shadow-lg w-full max-w-sm animate__animated animate__fadeIn">
-                <h1 class="text-2xl font-bold text-center mb-6">Customer Portal</h1>
 
-                <!-- Tab untuk Login dan Register -->
-                <div class="flex justify-around mb-6">
-                    <button onclick="toggleForm('login')" 
-                        class="text-blue-500 font-bold focus:outline-none">Login</button>
-                    <button onclick="toggleForm('register')" 
-                        class="text-gray-500 font-bold focus:outline-none">Register</button>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form method="POST" action="{{ route('customer.register') }}">
+                @csrf
+                <h1>Create Account</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
-
-                <!-- Form Login -->
-                <div id="loginForm">
-                    <form method="POST" action="{{ route('customer.login') }}">
-                        @csrf
-
-                        <!-- Input Email -->
-                        <div class="mb-4">
-                            <label for="email" class="block text-gray-700">Email:</label>
-                            <input type="email" id="email" name="email" required
-                                class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-
-                        <!-- Input Password -->
-                        <div class="mb-4">
-                            <label for="password" class="block text-gray-700">Password:</label>
-                            <input type="password" id="password" name="password" required
-                                class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div>
-                            <button type="submit"
-                                class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
-                                Login
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
-                <!-- Form Register -->
-                <div id="registerForm" class="hidden">
-                    <form method="POST" action="{{ route('customer.register') }}">
-                        @csrf
-
-                        <!-- Input Name -->
-                        <div class="mb-4">
-                            <label for="name" class="block text-gray-700">Name:</label>
-                            <input type="text" id="name" name="name" required
-                                class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
-                        </div>
-
-                        <!-- Input Email -->
-                        <div class="mb-4">
-                            <label for="email" class="block text-gray-700">Email:</label>
-                            <input type="email" id="email" name="email" required
-                                class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
-                        </div>
-
-                        <!-- Input Password -->
-                        <div class="mb-4">
-                            <label for="password" class="block text-gray-700">Password:</label>
-                            <input type="password" id="password" name="password" required
-                                class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
-                        </div>
-
-                        <!-- Konfirmasi Password -->
-                        <div class="mb-4">
-                            <label for="password_confirmation" class="block text-gray-700">Confirm Password:</label>
-                            <input type="password" id="password_confirmation" name="password_confirmation" required
-                                class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500">
-                        </div>
-
-                        <!-- Submit Button -->
-                        <div>
-                            <button type="submit"
-                                class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out">
-                                Register
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+                <span>or use your email for registration</span>
+                <input type="text" id="name" name="name" placeholder="Name" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" required>
+                <button type="submit">Sign Up</button>
+                <p>Already have an account? <a href="#" onclick="toggleForm('login')">Sign In</a></p>
+            </form>
         </div>
-
-        <!-- Kolom kanan untuk banner -->
-        <div id="Banner" class="w-7/12 bg-cover bg-right text-white flex flex-col justify-center items-center font-sans" style="background-image: url('https://c0.wallpaperflare.com/preview/301/940/932/amusement-park-blue-candy-floss-cotton-candy.jpg');">
-            <div class="text-center">
-                <h2 class="text-4xl font-bold mb-4">TOLONG AKU STRESSS</h2>
-                <p class="text-lg">KEPALA AKU SAKIT</p>
-                <p class="mt-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non dignissimos nam optio eius delectus possimus nostrum dolores amet maiores corporis!</p>
+        <div class="form-container sign-in">
+            <form method="POST" action="{{ route('customer.login') }}">
+                @csrf
+                <h1>Sign In</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+                <span>or use your email for login</span>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Sign In</button>
+                <p>Don't have an account? <a href="#" onclick="toggleForm('register')">Sign Up</a></p>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Welcome Back!</h1>
+                    <p>Please sign in to your account.</p>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details and start your journey with us.</p>
+                </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>

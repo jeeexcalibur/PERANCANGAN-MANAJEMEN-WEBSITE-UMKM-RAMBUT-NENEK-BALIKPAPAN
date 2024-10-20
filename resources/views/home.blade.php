@@ -1,101 +1,175 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Slideshow Section -->
+<!-- Hero Section -->
+<section class="hero relative bg-cover bg-center text-white py-24" style="background-image: url('{{ asset('assets/images/gallery-img-06.jpg') }}');">
+    <div class="absolute inset-0 bg-black opacity-40"></div>
+    <div class="container mx-auto text-center relative z-10">
+        <h1 class="text-5xl md:text-6xl font-bold leading-tight animate-typing">Manisnya Tradisi, Nikmatnya Setiap Gigitan!</h1>
+        <p class="mt-6 text-xl md:text-2xl animate-fade-in">Rambut Nenek Balikpapan: Cemilan Legendaris untuk Semua Momen.</p>
+        <a href="#products" class="mt-12 inline-block text-white font-semibold py-3 px-6 rounded-full shadow-lg hover:scale-105 transform transition duration-300" style="background-color: #8b0330;">Eksplor Produk Kami</a>
 
-<!-- Top Section -->
-<div class="flex flex-wrap justify-center space-x-4 py-8">
-    <!-- New Hoodie -->
-    <div class="relative bg-white p-4 rounded-lg shadow-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-        <img alt="Person wearing a new hoodie" class="w-full h-full object-cover rounded-lg" height="400" src="{{ asset('assets/images/pic12.jpg') }}" width="300"/>
-        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-bold">New Hoodie</h2>
-            <p class="text-xs sm:text-sm md:text-base">BUY ONE GET ONE FREE</p>
-        </div>
-        <div class="absolute top-4 right-4 bg-white rounded-full p-2">
-            <i class="far fa-heart text-gray-500"></i>
-        </div>
-        <div class="absolute top-4 left-4 bg-white text-black px-2 py-1 rounded-full text-xs">26% OFF</div>
     </div>
+</section>
 
-    <!-- Women Fashion -->
-    <div class="relative bg-white p-4 rounded-lg shadow-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-        <img alt="Woman in fashion outfit" class="w-full h-full object-cover rounded-lg" height="400" src="{{ asset('assets/images/pic6.jpg') }}" width="300"/>
-        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-bold">Women Fashion</h2>
-            <p class="text-xs sm:text-sm md:text-base">New offer 50% off</p>
+<!-- Features Section -->
+<section class="features py-20 bg-gray-100">
+    <div class="container mx-auto text-center">
+        <h2 class="text-4xl font-semibold mb-12">Mengapa Belanja di Rambut Nenek?</h2>
+        <div class="flex flex-wrap justify-center">
+            <div class="feature w-full sm:w-1/2 lg:w-1/3 p-6 transition-transform transform hover:scale-105">
+                <div class="mb-4 text-6xl" style="color: #8b0330;">
+                    <i class="fas fa-shipping-fast"></i>
+                </div>
+                <h3 class="text-2xl font-semibold">Pengiriman Cepat</h3>
+                <p class="mt-4" style="color: #8b0330;">Nikmati produk kami yang sampai di tangan Anda dengan cepat dan tepat waktu.</p>
+            </div>
+            <div class="feature w-full sm:w-1/2 lg:w-1/3 p-6 transition-transform transform hover:scale-105">
+                <div class="mb-4 text-6xl" style="color: #8b0330;">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <h3 class="text-2xl font-semibold">Harga Terjangkau</h3>
+                <p class="mt-4" style="color: #8b0330;">Dapatkan produk berkualitas tinggi dengan harga yang bersahabat.</p>
+            </div>
+            <div class="feature w-full sm:w-1/2 lg:w-1/3 p-6 transition-transform transform hover:scale-105">
+                <div class="mb-4 text-6xl" style="color: #8b0330;">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <h3 class="text-2xl font-semibold">Dukungan 24/7</h3>
+                <p class="mt-4" style="color: #8b0330;">Kami siap membantu Anda kapan saja dan di mana saja untuk pengalaman berbelanja yang lebih baik.</p>
+            </div>
         </div>
-        <div class="absolute top-4 right-4 bg-white rounded-full p-2">
-            <i class="far fa-heart text-gray-500"></i>
-        </div>
-        <div class="absolute top-4 left-4 bg-white text-black px-2 py-1 rounded-full text-xs">50% OFF</div>
     </div>
-
-    <!-- New Jacket -->
-    <div class="relative bg-white p-4 rounded-lg shadow-lg w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
-        <img alt="Person wearing a new jacket" class="w-full h-full object-cover rounded-lg" height="400" src="{{ asset('assets/images/pic3.jpg') }}" width="300"/>
-        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
-            <h2 class="text-lg sm:text-xl md:text-2xl font-bold">New Jacket</h2>
-            <p class="text-xs sm:text-sm md:text-base">BUY ONE GET ONE FREE</p>
-        </div>
-        <div class="absolute top-4 right-4 bg-white rounded-full p-2">
-            <i class="far fa-heart text-gray-500"></i>
-        </div>
-        <div class="absolute top-4 left-4 bg-white text-black px-2 py-1 rounded-full text-xs">36% OFF</div>
-    </div>
-</div>
-
-<!-- New Arrival Section -->
-<div class="text-center py-8">
-    <h2 class="text-2xl font-bold">Produk Unggulan Kami</h2>
-    <p class="text-blue-500">Harga Murah Harga Mewah</p>
-</div>
+</section>
 
 <!-- Product Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-4 sm:px-6 md:px-8">
-    @foreach($products as $product)
-    <div class="relative bg-white p-4 rounded-lg shadow-lg transition-transform transform hover:scale-105 duration-300">
-        <a href="{{ route('product.show', $product->id) }}">
-            @if($product->image)
-            <div class="aspect-w-1 aspect-h-1">
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="object-cover rounded-lg w-full h-auto" />
+<section id="products" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4 sm:px-6 md:px-8">
+        <h2 class="text-4xl font-semibold text-center mb-12">Produk Terlaris Kami</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            @foreach($products as $product)
+            <div class="relative bg-white p-6 rounded-lg shadow-md transition-transform transform hover:scale-105 duration-300 flex flex-col h-full">
+                <a href="{{ route('product.show', $product->id) }}" class="flex-grow">
+                    <div class="aspect-w-1 aspect-h-1">
+                        @if($product->image)
+                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="object-cover rounded-lg w-full h-48" />
+                        @else
+                        <img src="{{ asset('images/default.png') }}" alt="Default Image" class="object-cover rounded-lg w-full h-48" />
+                        @endif
+                    </div>
+                    <div class="absolute top-2 left-2 bg-pink-600 text-white px-2 py-1 rounded-full text-xs">Best Seller</div>
+                    <div class="p-4 flex-grow flex flex-col justify-between">
+                        <h2 class="text-lg md:text-xl font-semibold mb-2 text-gray-800">{{ $product->name }}</h2>
+                        <p class="text-sm md:text-base text-gray-600 mb-2 flex-grow">{{ Str::limit($product->description, 100) }}</p>
+                    </div>
+                </a>
+                <div class="flex justify-center mt-2">
+                    <p class="text-lg font-bold" style="color: #8b0330;">Rp {{ number_format($product->price, 2, ',', '.') }}</p>
+                </div>
             </div>
-            @else
-            <div class="aspect-w-1 aspect-h-1">
-                <img src="{{ asset('images/default.png') }}" alt="Default Image" class="object-cover rounded-lg w-full h-auto" />
-            </div>
-            @endif
-            <div class="absolute top-2 left-2 sm:top-4 sm:left-4 bg-green-500 text-white px-1 sm:px-2 py-1 rounded-full text-xs">Best Seller</div>
-            <div class="p-4 flex flex-col flex-grow">
-                <h2 class="text-lg md:text-xl font-semibold mb-2 text-gray-800">{{ $product->name }}</h2>
-                <p class="text-sm md:text-base text-gray-600 mb-2 flex-grow">{{ Str::limit($product->description, 100) }}</p>
-                <p class="text-lg font-bold text-pink-600 mb-2">Rp {{ number_format($product->price, 2, ',', '.') }}</p>
-            </div>
-        </a>
-
+            @endforeach
+        </div>
     </div>
-    @endforeach
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials py-20 bg-gray-100">
+    <div class="container mx-auto text-center">
+        <h2 class="text-4xl font-semibold mb-12" style="color: #8b0330;">Apa Kata Pelanggan Kami</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <div class="testimonial bg-white p-8 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                <div class="relative mb-4">
+                    <img src="{{ asset('assets/images/gallery-img-06.jpg') }}" alt="Customer A" class="w-16 h-16 rounded-full border-4 border-purple-600 mx-auto">
+                </div>
+                <p class="italic">"Pelayanan yang luar biasa dan produk berkualitas tinggi!"</p>
+                <p class="mt-4 font-semibold">- Pelanggan A</p>
+            </div>
+            <div class="testimonial bg-white p-8 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                <div class="relative mb-4">
+                    <img src="{{ asset('assets/images/gallery-img-06.jpg') }}" alt="Customer B" class="w-16 h-16 rounded-full border-4 border-purple-600 mx-auto">
+                </div>
+                <p class="italic">"Pengiriman cepat dan dukungan pelanggan yang sangat baik!"</p>
+                <p class="mt-4 font-semibold">- Pelanggan B</p>
+            </div>
+            <div class="testimonial bg-white p-8 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                <div class="relative mb-4">
+                    <img src="{{ asset('assets/images/gallery-img-06.jpg') }}" alt="Customer C" class="w-16 h-16 rounded-full border-4 border-purple-600 mx-auto">
+                </div>
+                <p class="italic">"Saya suka berbelanja di sini, selalu puas!"</p>
+                <p class="mt-4 font-semibold">- Pelanggan C</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Customer Service Button -->
+<div class="fixed bottom-5 right-5 z-50">
+    <a href="https://wa.me/6281549216635" target="_blank" class="bg-gradient-to-r from-green-400 to-green-600 text-white p-4 rounded-full shadow-lg hover:scale-105 transform transition duration-300 focus:outline-none">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
 </div>
 
 @endsection
 
 @push('scripts')
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.8.0/gsap.min.js"></script>
 <script>
-    const swiper = new Swiper('.swiper-container', {
-        loop: true,
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        autoplay: {
-            delay: 3000,
-            disableOnInteraction: false,
-        },
+    document.addEventListener('DOMContentLoaded', function () {
+        // Animasi menggunakan GSAP
+        gsap.from(".hero h1", { duration: 1.5, opacity: 0, y: -50, ease: "power2.out" });
+        gsap.from(".hero p", { duration: 1.5, opacity: 0, y: 50, delay: 0.3, ease: "power2.out" });
+        gsap.from(".hero a", { duration: 1.5, opacity: 0, scale: 0.8, delay: 0.6, ease: "power2.out" });
+
+        gsap.from(".feature", { duration: 1.2, opacity: 0, y: 30, stagger: 0.3 });
+        gsap.from(".testimonial", { duration: 1.2, opacity: 0, y: 30, stagger: 0.3 });
     });
 </script>
+@endpush
+
+@push('styles')
+<style>
+    /* Custom Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    /* Typing effect */
+    .animate-typing {
+        border-right: 3px solid white;
+        white-space: nowrap;
+        overflow: hidden;
+        animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
+    }
+
+    @keyframes typing {
+        from {
+            width: 0;
+        }
+        to {
+            width: 100%;
+        }
+    }
+
+    @keyframes blink-caret {
+        from, to {
+            border-color: transparent;
+        }
+        50% {
+            border-color: white;
+        }
+    }
+
+    /* Fade In Animation */
+    .animate-fade-in {
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+        }
+    }
+</style>
 @endpush

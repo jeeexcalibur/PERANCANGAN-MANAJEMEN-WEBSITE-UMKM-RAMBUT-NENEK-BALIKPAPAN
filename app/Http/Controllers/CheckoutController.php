@@ -30,6 +30,7 @@ class CheckoutController extends Controller
         $request->validate([
             'payment_method' => 'required|in:QRIS,Transfer Bank',
             'payment_proof' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'phone' => 'required|string|max:15', // Validasi untuk nomor handphone
         ]);
 
         $carts = Cart::where('user_id', Auth::id())->with('product')->get();
@@ -53,6 +54,7 @@ class CheckoutController extends Controller
             'payment_method' => $request->payment_method,
             'payment_proof' => $paymentProofPath,
             'shipping_address' => $request->shipping_address, // Simpan alamat pengiriman
+            'phone' => $request->phone, // Simpan nomor handphone
             'status' => 'Diproses',
         ]);
 

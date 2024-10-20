@@ -8,6 +8,12 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Transaction;
+use App\Filament\Widgets\ProductStatsOverview;
+use App\Filament\Widgets\XIncomeChart;
+use App\Filament\Resources\RevenueResource\Widgets\Income;
+
+
+
 
 class RevenueResource extends Resource
 {
@@ -59,6 +65,20 @@ class RevenueResource extends Resource
     {
         return [
             'index' => Pages\ListRevenues::route('/'),
+        ];
+    }
+
+    // public static function getWidgets(): array
+    // {
+    //     return [
+    //         Income::class,
+    //     ];
+    // }
+
+    public static function getWidgets(): array
+    {
+        return [
+            ProductStatsOverview::class,
         ];
     }
 }

@@ -33,6 +33,9 @@ class TransactionResource extends Resource
                         'Diterima' => 'Diterima',  // Tampilkan 'Diterima' untuk opsi status
                     ])
                     ->required(),
+                    Forms\Components\TextArea::make('phone')
+                    ->label('Nomor Handphone')
+                    ->maxLength(255),
                     Forms\Components\TextArea::make('shipping_address')
                     ->label('Alamat Pengiriman')
                     ->maxLength(255)

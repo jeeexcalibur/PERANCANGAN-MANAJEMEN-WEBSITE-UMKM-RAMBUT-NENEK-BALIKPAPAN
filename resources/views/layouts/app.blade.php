@@ -12,58 +12,177 @@
     @livewireStyles
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+        }
 
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        /* Navbar */
+        header {
+            background-color: #8b0330; /* Soft pink */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        nav a {
+            color: #ffffff;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            color: #A5855F; /* Darker pink on hover */
+            transform: scale(1.1);
+        }
+
+        /* Active link color */
+        .active-link {
+    color: #A5855F; /* Active link color */
+    border-bottom: 2px solid #A5855F; /* Menambahkan border bawah */
+    padding-bottom: 4px; /* Menambahkan jarak antara teks dan garis bawah */
+    font-weight: bold; /* Membuat teks lebih tebal jika diinginkan */
+}
+
+        /* Footer */
+        footer {
+            background-color: #8b0330;
+            color: #f1f1f1;
+            margin-top: 2rem;
+        }
+
+        footer h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer a {
+            color: #f1f1f1;
+            transition: all 0.3s;
+        }
+
+        footer a:hover {
+            color: #A5855F; /* Darker pink on hover */
+        }
+
+        /* Hamburger Menu */
+        .navbar-toggler {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-icons {
+                display: none;
+            }
+
+            .navbar-toggler {
+                display: block;
+                cursor: pointer;
+                color: #3b3b3b;
+                font-size: 1.5rem;
+            }
+
+            .navbar-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background-color: #f1c0e3; /* Soft pink */
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                z-index: 10;
+            }
+
+            .navbar-menu.active {
+                display: flex;
+            }
+
+            nav a {
+                padding: 10px 20px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+
+            nav a:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
 </head>
 
-<body class="bg-gray-100 font-sans">
+<body>
     <!-- Navbar -->
-    <header class="bg-white shadow-md text-black ">
+    <header class="shadow-md text-black relative">
         <div class="container mx-auto flex justify-between items-center py-4 px-6 flex-wrap">
             <div class="flex items-center">
-                <span class="ml-3 text-2xl font-bold">Rambut Nenek BPN</span>
+                <span class="navbar-brand">Rambut Nenek BPN</span>
             </div>
-            <nav class="flex space-x-6 flex-wrap">
-                <a class="text-lg font-semibold flex items-center hover:text-pink-200 transition duration-300" href="{{ route('home') }}">
+            <div class="navbar-toggler" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav class="flex items-center space-x-6 flex-wrap navbar-menu">
+                <a class="text-lg font-semibold flex items-center {{ request()->is('home') ? 'active-link' : '' }}" href="{{ route('home') }}">
                     <i class="fas fa-home mr-2"></i> Home
                 </a>
-                <a class="text-lg flex items-center hover:text-pink-200 transition duration-300" href="{{ route('home') }}">
+                <a class="text-lg flex items-center {{ request()->is('home') ? 'active-link' : '' }}" href="{{ route('home') }}#products">
                     <i class="fas fa-cookie-bite mr-2"></i> Produk
                 </a>
+
                 @auth
-                <a class="text-lg flex items-center hover:text-pink-200 transition duration-300" href="{{ route('cart.index') }}">
+                <a class="text-lg flex items-center {{ request()->is('cart') ? 'active-link' : '' }}" href="{{ route('cart.index') }}">
                     <i class="fas fa-shopping-cart mr-2"></i> Keranjang Belanja
                 </a>
-                <a class="text-lg flex items-center hover:text-pink-200 transition duration-300" href="{{ route('transactions.index') }}">
+                <a class="text-lg flex items-center {{ request()->is('transactions') ? 'active-link' : '' }}" href="{{ route('transactions.index') }}">
                     <i class="fas fa-file-invoice-dollar mr-2"></i> Transaksi
                 </a>
-                <a class="text-lg flex items-center hover:text-pink-200 transition duration-300" href="{{ route('about') }}">
+                <a class="text-lg flex items-center {{ request()->is('about') ? 'active-link' : '' }}" href="{{ route('about') }}">
                     <i class="fas fa-info-circle mr-2"></i> About Us
                 </a>
-                <a class="text-lg flex items-center hover:text-pink-200 transition duration-300" href="{{ route('profile') }}">
+                <a class="text-lg flex items-center {{ request()->is('profile') ? 'active-link' : '' }}" href="{{ route('profile') }}">
                     <i class="fas fa-user mr-2"></i> Profile
                 </a>
                 @else
-                <a class="text-lg flex items-center hover:text-pink-200 transition duration-300" href="{{ route('customer.login') }}">
+                <a class="text-lg flex items-center {{ request()->is('customer/login') ? 'active-link' : '' }}" href="{{ route('customer.login') }}">
                     <i class="fas fa-sign-in-alt mr-2"></i> Login
                 </a>
                 @endauth
             </nav>
-            <div class="flex space-x-4">
+            <div class="flex space-x-4 navbar-icons">
                 @auth
                 <form action="{{ route('customer.logout') }}" method="POST" class="inline">
                     @csrf
-                    <button type="submit" class="text-lg flex items-center hover:text-pink-200 transition duration-300">
+                    <button type="submit" class="text-lg flex items-center">
                         <i class="fas fa-sign-out-alt mr-2"></i> Logout
                     </button>
                 </form>
                 @else
-                <a class="text-lg flex items-center hover:text-pink-200 transition duration-300" href="#">
+                <a href="#" class="text-lg flex items-center">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a class="text-lg flex items-center hover:text-pink-200 transition duration-300" href="#">
+                <a href="#" class="text-lg flex items-center">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a class="text-lg flex items-center hover:text-pink-200 transition duration-300" href="#">
+                <a href="#" class="text-lg flex items-center">
                     <i class="fab fa-twitter"></i>
                 </a>
                 @endauth
@@ -72,34 +191,39 @@
     </header>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-8">
+    <main class="container mx-auto px-4 py-8 flex-1">
         @yield('content')
     </main>
 
     <!-- Footer -->
-    <footer class="bg-pink-600 shadow-md mt-8">
-        <div class="container mx-auto px-6 py-4 text-center">
-            <p class="text-white">&copy; {{ date('Y') }} Cake Shop. All rights reserved.</p>
+    <footer class="mt-8 p-4">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <div class="text-center md:text-left">
+                <h3 class="text-xl font-bold">Rambut Nenek BPN</h3>
+                <p class="text-sm">&copy; {{ date('Y') }} Rambut Nenek BPN. All rights reserved.</p>
+            </div>
+
+            <div class="mt-4 md:mt-0 flex space-x-4">
+                <a href="#">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
         </div>
     </footer>
 
     @livewireScripts
+
+    <script>
+        function toggleMenu() {
+            const menu = document.querySelector('.navbar-menu');
+            menu.classList.toggle('active');
+        }
+    </script>
 </body>
-<script src="{{ asset('frontend/js/jquery.min.js') }}"></script>
-<script src="{{ asset('frontend/js/jquery-migrate-3.0.1.min.js') }}"></script>
-<script src="{{ asset('frontend/js/popper.min.js') }}"></script>
-<script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('frontend/js/jquery.easing.1.3.js') }}"></script>
-<script src="{{ asset('frontend/js/jquery.waypoints.min.js') }}"></script>
-<script src="{{ asset('frontend/js/jquery.stellar.min.js') }}"></script>
-<script src="{{ asset('frontend/js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
-<script src="{{ asset('frontend/js/aos.js') }}"></script>
-<script src="{{ asset('frontend/js/jquery.animateNumber.min.js') }}"></script>
-<script src="{{ asset('frontend/js/bootstrap-datepicker.js') }}"></script>
-<script src="{{ asset('frontend/js/jquery.timepicker.min.js') }}"></script>
-<script src="{{ asset('frontend/js/scrollax.min.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-<script src="{{ asset('frontend/js/google-map.js') }}"></script>
-<script src="{{ asset('frontend/js/main.js') }}"></script>
 </html>

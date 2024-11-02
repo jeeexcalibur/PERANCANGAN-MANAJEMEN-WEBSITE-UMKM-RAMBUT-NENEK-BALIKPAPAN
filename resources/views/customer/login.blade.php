@@ -60,7 +60,7 @@
         }
 
         .container button {
-            background-color: #512da8;
+            background-color: #8b0330;
             color: #fff;
             font-size: 12px;
             padding: 10px 45px;
@@ -177,9 +177,9 @@
         }
 
         .toggle {
-            background-color: #512da8;
+            background-color: #8b0330;
             height: 100%;
-            background: linear-gradient(to right, #5c6bc0, #512da8);
+            background: linear-gradient(to right, #4b0b20, #8b0330);
             color: #fff;
             position: relative;
             left: -100%;
@@ -263,7 +263,7 @@
                 @csrf
                 <h1>Create Account</h1>
                 <div class="social-icons">
-                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="{{ route('google.login') }}" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -282,7 +282,7 @@
                 @csrf
                 <h1>Sign In</h1>
                 <div class="social-icons">
-                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="{{ route('google.login') }}" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -297,12 +297,12 @@
         <div class="toggle-container">
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
-                    <h1>Welcome Back!</h1>
-                    <p>Please sign in to your account.</p>
+                    <h1>Terimakasih sudah mendaftar!</h1>
+                    <p>Harap masukan data terlebih dahulu.</p>
                 </div>
                 <div class="toggle-panel toggle-right">
-                    <h1>Hello, Friend!</h1>
-                    <p>Enter your personal details and start your journey with us.</p>
+                    <h1>Halloha!, Selamat Datang!!</h1>
+                    <p>Masukan email dan password anda untuk mulai mengeksplor produk kami</p>
                 </div>
             </div>
         </div>

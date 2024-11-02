@@ -5,12 +5,45 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class CustomerAuthController extends Controller
 {
     public function showLoginForm()
     {
         return view('customer.login'); // Nama view form login customer
+    }
+
+    // Mengarahkan ke provider (Google)
+    public function redirectToProvider()
+    {
+        Log::info('Redirecting to Google');
+        return Socialite::driver('google')->redirect();
+    }
+
+    // Menangani callback dari Google
+    public function handleGoogleCallback()
+    {
+        $googleUser = Socialite::driver('google')->user();
+
+        // Cari atau buat pengguna di database
+        $user = User::where('email', $googleUser->getEmail())->first();
+
+        if (!$user) {
+            // Jika pengguna belum ada, buat pengguna baru
+            $user = User::create([
+                'name' => $googleUser->getName(),
+                'email' => $googleUser->getEmail(),
+                'password' => bcrypt(str::random(16)), // Ganti dengan password acak
+            ]);
+        }
+
+        // Masuk ke aplikasi
+        Auth::login($user, true);
+
+        return redirect()->intended('/'); // Ganti dengan rute tujuan setelah login
     }
 
     public function login(Request $request)

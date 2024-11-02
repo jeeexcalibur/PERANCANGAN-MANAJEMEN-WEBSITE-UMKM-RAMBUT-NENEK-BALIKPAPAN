@@ -5,6 +5,7 @@
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Include SweetAlert -->
     <style>
         /* Add shadow and rounded corners */
         .product-card {
@@ -71,7 +72,7 @@
                 <span class="text-gray-700">Deskripsi:</span>
                 <p class="text-gray-700 mt-2">{{ $product->description }}</p>
             </div>
-            <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mt-6">
+            <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mt-6" id="addToCartForm">
                 @csrf
                 <div>
                     <span class="text-gray-700">Quantity</span>
@@ -109,6 +110,21 @@
             if (quantity > 1) {
                 quantityInput.value = quantity - 1;
             }
+        });
+
+        document.getElementById('addToCartForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            @auth
+                this.submit(); // If the user is authenticated, submit the form
+            @else
+                Swal.fire({
+                    title: 'Harap Login Terlebih Dahulu',
+                    text: 'Silakan masuk untuk menambahkan produk ke keranjang.',
+                    icon: 'warning',
+                    confirmButtonText: 'OK'
+                });
+            @endauth
         });
     </script>
 </body>

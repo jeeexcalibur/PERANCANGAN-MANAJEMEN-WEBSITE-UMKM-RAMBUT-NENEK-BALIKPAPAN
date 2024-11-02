@@ -40,7 +40,7 @@
                                 <td class="text-center px-6 py-4">
                                     @if($transaction->status == 'Diproses')
                                         <span class="px-3 py-1 inline-flex leading-5 font-semibold rounded-full bg-yellow-200 text-yellow-800">Diproses</span>
-                                    @elseif($transaction->status == 'Dikirimkan')
+                                    @elseif($transaction->status == 'Dikirim')
                                         <span class="px-3 py-1 inline-flex leading-5 font-semibold rounded-full bg-blue-200 text-blue-800">Dikirimkan</span>
                                     @else
                                         <span class="px-3 py-1 inline-flex leading-5 font-semibold rounded-full bg-green-200 text-green-800">Selesai</span>

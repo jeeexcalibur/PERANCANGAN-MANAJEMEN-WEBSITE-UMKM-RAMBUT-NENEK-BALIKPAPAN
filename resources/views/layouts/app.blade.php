@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cake Shop - UMKM Rambut Nenek Bpn</title>
+    <title>UMKM Rambut Nenek Bpn</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -19,11 +19,15 @@
             margin: 0;
             font-family: 'Arial', sans-serif;
             background-color: #f7f7f7;
+            position: relative; /* Added for positioning the circles */
         }
+
+
 
         body {
             display: flex;
             flex-direction: column;
+            z-index: 1; /* Ensure body content is above circles */
         }
 
         main {
@@ -59,11 +63,11 @@
 
         /* Active link color */
         .active-link {
-    color: #A5855F; /* Active link color */
-    border-bottom: 2px solid #A5855F; /* Menambahkan border bawah */
-    padding-bottom: 4px; /* Menambahkan jarak antara teks dan garis bawah */
-    font-weight: bold; /* Membuat teks lebih tebal jika diinginkan */
-}
+            color: #A5855F; /* Active link color */
+            border-bottom: 2px solid #A5855F; /* Menambahkan border bawah */
+            padding-bottom: 4px; /* Menambahkan jarak antara teks dan garis bawah */
+            font-weight: bold; /* Membuat teks lebih tebal jika diinginkan */
+        }
 
         /* Footer */
         footer {
@@ -131,6 +135,10 @@
 </head>
 
 <body>
+    <!-- Circle Backgrounds -->
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+
     <!-- Navbar -->
     <header class="shadow-md text-black relative">
         <div class="container mx-auto flex justify-between items-center py-4 px-6 flex-wrap">
@@ -196,29 +204,38 @@
     </main>
 
     <!-- Footer -->
-    <footer class="mt-8 p-4">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-            <div class="text-center md:text-left">
-                <h3 class="text-xl font-bold">Rambut Nenek BPN</h3>
-                <p class="text-sm">&copy; {{ date('Y') }} Rambut Nenek BPN. All rights reserved.</p>
+    <footer class="bg-[#8b0330] text-white py-8">
+        <div class="container mx-auto">
+            <div class="flex flex-wrap justify-between mb-6">
+                <div class="w-full md:w-1/4 mb-6">
+                    <h2 class="text-2xl font-bold mb-2">Rambut<span class="text-[#A5855F]"> Nenek BPN</span></h2>
+                    <p class="text-sm">Rambut Nenek Balikpapan: Cemilan Legendaris untuk Semua Momen..</p>
+                    <ul class="flex space-x-4 mt-2">
+                        <li><a href="#" class="hover:text-[#A5855F]"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#" class="hover:text-[#A5855F]"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#" class="hover:text-[#A5855F]"><i class="fab fa-twitter"></i></a></li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-1/4 mb-6">
+                    <h3 class="text-lg font-semibold mb-2">Link Terkait</h3>
+                    <ul>
+                        <li><a href="{{ route('home') }}" class="hover:text-[#A5855F]">Home</a></li>
+                        <li><a href="{{ route('about') }}" class="hover:text-[#A5855F]">About Us</a></li>
+                        <li><a href="{{ route('home') }}#products" class="hover:text-[#A5855F]">Produk</a></li>
+                        <li><a href="{{ route('cart.index') }}" class="hover:text-[#A5855F]">Keranjang Belanja</a></li>
+                    </ul>
+                </div>
+                <div class="w-full md:w-1/4 mb-6">
+                    <h3 class="text-lg font-semibold mb-2">Kontak Kami</h3>
+                    <p>Email: <a href="mailto:info@rambutnenekbpn.com" class="hover:text-[#A5855F]">info@rambutnenekbpn.com</a></p>
+                    <p>Tel: <a href="tel:+621234567890" class="hover:text-[#A5855F]">+62 123 456 7890</a></p>
+                </div>
             </div>
-
-            <div class="mt-4 md:mt-0 flex space-x-4">
-                <a href="#">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="#">
-                    <i class="fab fa-twitter"></i>
-                </a>
-            </div>
+            <p class="text-center text-sm">© 2024 Rambut Nenek BPN. Semua hak dilindungi.</p>
         </div>
     </footer>
 
     @livewireScripts
-
     <script>
         function toggleMenu() {
             const menu = document.querySelector('.navbar-menu');
@@ -226,4 +243,5 @@
         }
     </script>
 </body>
+
 </html>

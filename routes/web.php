@@ -45,3 +45,5 @@ Route::get('/revenues/export', [RevenueController::class, 'export'])->name('reve
 Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
 Route::put('/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
+Route::get('/customer/login/google', [CustomerAuthController::class, 'redirectToProvider'])->name('google.login');
+Route::get('/customer/login/google/callback', [CustomerAuthController::class, 'handleGoogleCallback']);

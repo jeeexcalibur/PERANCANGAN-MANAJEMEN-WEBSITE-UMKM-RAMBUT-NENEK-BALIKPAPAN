@@ -18,6 +18,7 @@ class TransactionResource extends Resource
     protected static ?string $model = Transaction::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-receipt-refund';
+    protected static ?string $navigationGroup = 'Pendapatan & Transaksi';
     protected static ?string $navigationLabel = 'Transaksi';
     protected static ?string $pluralLabel = 'Transaksi';
     protected static ?string $label = 'Transaksi';
@@ -31,6 +32,7 @@ class TransactionResource extends Resource
                         'Diproses' => 'Diproses',  // Tampilkan 'Diproses' untuk opsi status
                         'Dikirim' => 'Dikirim',    // Tampilkan 'Dikirim' untuk opsi status
                         'Diterima' => 'Diterima',  // Tampilkan 'Diterima' untuk opsi status
+                        'Dibatalkan' => 'Dibatalkan', // Tampilkan 'Dibatalkan' untuk opsi status
                     ])
                     ->required(),
                     Forms\Components\TextArea::make('phone')
@@ -68,6 +70,7 @@ class TransactionResource extends Resource
                     'Diproses' => 'warning',
                     'Dikirim' => 'info',
                     'Diterima' => 'success',
+                    'Dibatalkan' => 'danger',
                     default => 'default', // Warna default jika tidak ada kecocokan
                 }),
             Tables\Columns\TextColumn::make('payment_proof') 
@@ -95,6 +98,7 @@ class TransactionResource extends Resource
                         'Diproses' => 'Diproses',
                         'Dikirim' => 'Dikirim',
                         'Diterima' => 'Diterima',
+                        'Dibatalkan' => 'Dibatalkan',
                     ]),
                 ]);
     }
@@ -114,4 +118,11 @@ class TransactionResource extends Resource
             'edit' => Pages\EditTransaction::route('/{record}/edit'),
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::where('status', '=', 'Diproses')->count();
+    }
+
+    
 }

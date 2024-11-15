@@ -131,6 +131,19 @@
                 border-bottom: none;
             }
         }
+
+        form button {
+            color: #ffffff;
+            background-color: transparent;
+            border: none;
+            padding: 10px 20px;
+            transition: all 0.3s;
+        }
+
+        form button:hover {
+            color: #A5855F; /* Darker pink on hover */
+            transform: scale(1.1);
+        }
     </style>
 </head>
 

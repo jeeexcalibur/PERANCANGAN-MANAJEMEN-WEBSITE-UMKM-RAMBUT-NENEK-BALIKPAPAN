@@ -115,16 +115,39 @@
         document.getElementById('addToCartForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the form from submitting
 
-            @auth
-                this.submit(); // If the user is authenticated, submit the form
-            @else
+            var productStock = {{ $product->stock }}; // Menyimpan stok produk
+
+            var quantity = parseInt(document.getElementById('quantity').value);
+
+            if (quantity > productStock) {
+                // Jika quantity lebih banyak dari stok
                 Swal.fire({
-                    title: 'Harap Login Terlebih Dahulu',
-                    text: 'Silakan masuk untuk menambahkan produk ke keranjang.',
-                    icon: 'warning',
+                    title: 'Jumlah Stok Tidak Cukup',
+                    text: 'Stok produk yang tersedia hanya ' + productStock + ' buah.',
+                    icon: 'error',
                     confirmButtonText: 'OK'
                 });
-            @endauth
+            } else if (productStock === 0) {
+                // Jika produk habis
+                Swal.fire({
+                    title: 'Stok Produk Habis',
+                    text: 'Produk ini sudah habis, coba pilih produk lain.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                // Jika valid, lanjutkan submit
+                @auth
+                    this.submit(); // Jika pengguna sudah login, submit form
+                @else
+                    Swal.fire({
+                        title: 'Harap Login Terlebih Dahulu',
+                        text: 'Silakan masuk untuk menambahkan produk ke keranjang.',
+                        icon: 'warning',
+                        confirmButtonText: 'OK'
+                    });
+                @endauth
+            }
         });
     </script>
 </body>

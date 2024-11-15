@@ -12,8 +12,9 @@ class XTotalChart extends ChartWidget
 
     protected function getData(): array
     {
-        // Ambil data penjualan bulanan (jumlah transaksi)
+        // Ambil data penjualan bulanan (jumlah transaksi dengan status 'Diterima')
         $monthlySales = Transaction::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, COUNT(*) as total')
+            ->where('status', 'Diterima') // Menambahkan filter status 'Diterima'
             ->groupBy('year', 'month')
             ->orderBy('year')
             ->orderBy('month')

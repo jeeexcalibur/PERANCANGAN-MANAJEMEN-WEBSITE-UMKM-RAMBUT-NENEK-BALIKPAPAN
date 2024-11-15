@@ -15,8 +15,20 @@ class Product extends Model
         'description',
         'stock',
         'price',
-        'discount_percentage', // tambahkan kolom diskon
-        'start_date', // tanggal mulai diskon
-        'end_date', // tanggal berakhir diskon
+        'discount_percentage',
+        'start_date',
+        'end_date',
     ];
+
+    // Accessor untuk harga setelah diskon
+    public function getDiscountedPriceAttribute()
+    {
+        $today = now();
+        if ($this->discount_percentage > 0 && 
+            $this->start_date <= $today && 
+            $this->end_date >= $today) {
+            return $this->price - ($this->price * $this->discount_percentage / 100);
+        }
+        return $this->price;
+    }
 }

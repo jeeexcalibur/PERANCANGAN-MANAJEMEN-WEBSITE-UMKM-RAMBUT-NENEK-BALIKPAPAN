@@ -22,25 +22,32 @@ class StatsOverview extends BaseWidget
         $startDate = $startDate ? Carbon::parse($startDate) : null;
         $endDate = Carbon::parse($endDate);
 
-        // Hitung total penjualan (jumlah transaksi) dalam rentang tanggal yang ditentukan
+        // Hitung total penjualan (jumlah transaksi dengan status 'Diterima') dalam rentang tanggal yang ditentukan
         $totalSales = Transaction::when($startDate, fn($query) => $query->whereDate('created_at', '>=', $startDate))
-            ->whereDate('created_at', '<=', $endDate)
+            ->when($endDate, fn($query) => $query->whereDate('created_at', '<=', $endDate))
+            ->where('status', 'Diterima') // Menambahkan filter status 'Diterima'
             ->count();
 
-        // Hitung total pendapatan (total dari kolom 'total') dalam rentang tanggal yang ditentukan
+        // Hitung total pendapatan (total dari kolom 'total') dalam rentang tanggal yang ditentukan dan status 'Diterima'
         $totalRevenue = Transaction::when($startDate, fn($query) => $query->whereDate('created_at', '>=', $startDate))
-            ->whereDate('created_at', '<=', $endDate)
+            ->when($endDate, fn($query) => $query->whereDate('created_at', '<=', $endDate))
+            ->where('status', 'Diterima') // Menambahkan filter status 'Diterima'
             ->sum('total');
 
-        // Hitung total transaksi hari ini
-        $todaySales = Transaction::whereDate('created_at', today())->count();
+        // Hitung total transaksi hari ini dengan status 'Diterima'
+        $todaySales = Transaction::whereDate('created_at', today())
+            ->where('status', 'Diterima') // Menambahkan filter status 'Diterima'
+            ->count();
 
-        // Hitung total pendapatan hari ini
-        $todayRevenue = Transaction::whereDate('created_at', today())->sum('total');
+        // Hitung total pendapatan hari ini dengan status 'Diterima'
+        $todayRevenue = Transaction::whereDate('created_at', today())
+            ->where('status', 'Diterima') // Menambahkan filter status 'Diterima'
+            ->sum('total');
 
-        // Hitung total pelanggan unik dalam rentang tanggal yang ditentukan
+        // Hitung total pelanggan unik dalam rentang tanggal yang ditentukan dan status 'Diterima'
         $uniqueCustomers = Transaction::when($startDate, fn($query) => $query->whereDate('created_at', '>=', $startDate))
-            ->whereDate('created_at', '<=', $endDate)
+            ->when($endDate, fn($query) => $query->whereDate('created_at', '<=', $endDate))
+            ->where('status', 'Diterima') // Menambahkan filter status 'Diterima'
             ->distinct('user_id')
             ->count('user_id');
 

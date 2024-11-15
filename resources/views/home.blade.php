@@ -2,7 +2,11 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="hero relative bg-cover bg-center text-white py-24" style="background-image: url('{{ asset('assets/images/gallery-img-06.jpg') }}');">
+<section class="hero relative bg-cover bg-center text-white py-24" 
+            @php
+                $landingPage = \App\Models\LandingPages::where('image_title', 'Landing')->first();
+            @endphp
+                style="background-image: url('{{ $landingPage->image_url }}');">
     <div class="absolute inset-0 bg-black opacity-40"></div>
     <div class="container mx-auto text-center relative z-10">
         <h1 class="text-5xl md:text-6xl font-bold leading-tight animate-typing">Manisnya Tradisi, Nikmatnya Setiap Gigitan!</h1>
@@ -101,6 +105,7 @@
         </div>
     </div>
 </section>
+
 
 <!-- Customer Service Button -->
 <div class="fixed bottom-5 right-5 z-50">

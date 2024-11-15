@@ -22,7 +22,7 @@ use App\Filament\Widgets\ProductStatsOverview;
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
-
+    protected static ?string $navigationGroup = 'Produk';
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
     protected static ?string $navigationLabel = 'Produk';
     protected static ?string $pluralLabel = 'Produk';
@@ -49,16 +49,16 @@ public static function form(Form $form): Form
             Forms\Components\TextInput::make('price')
                 ->required()
                 ->numeric(),
-            Forms\Components\TextInput::make('discount_percentage') // Tambahkan diskon
-                ->label('Persentase Diskon (%)')
-                ->numeric()
-                ->default(0), // default 0
-            Forms\Components\DatePicker::make('start_date')
-                ->label('Tanggal Mulai Diskon')
-                ->nullable(),
-            Forms\Components\DatePicker::make('end_date')
-                ->label('Tanggal Berakhir Diskon')
-                ->nullable(),
+            // Forms\Components\TextInput::make('discount_percentage') // Tambahkan diskon
+            //     ->label('Persentase Diskon (%)')
+            //     ->numeric()
+            //     ->default(0), // default 0
+            // Forms\Components\DatePicker::make('start_date')
+            //     ->label('Tanggal Mulai Diskon')
+            //     ->nullable(),
+            // Forms\Components\DatePicker::make('end_date')
+            //     ->label('Tanggal Berakhir Diskon')
+            //     ->nullable(),
         ]);
 }
 
@@ -74,8 +74,8 @@ public static function form(Form $form): Form
                     Tables\Columns\TextColumn::make('price')
                     ->money('idr', true)
                     ->sortable(),
-                    Tables\Columns\TextColumn::make('discount_percentage')
-                    ->sortable(),
+                    // Tables\Columns\TextColumn::make('discount_percentage')
+                    // ->sortable(),
                     Tables\Columns\TextColumn::make('stock')
                     ->sortable(),
                     Tables\Columns\TextColumn::make('created_at')
@@ -110,4 +110,10 @@ public static function form(Form $form): Form
             ProductStatsOverview::class,
         ];
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    
 }

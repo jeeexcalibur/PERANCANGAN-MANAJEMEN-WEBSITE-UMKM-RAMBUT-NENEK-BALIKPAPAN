@@ -12,8 +12,9 @@ class XIncomeChart extends ChartWidget
 
     protected function getData(): array
     {
-        // Ambil data pendapatan bulanan
+        // Ambil data pendapatan bulanan dengan status 'Diterima'
         $monthlyRevenue = Transaction::selectRaw('YEAR(created_at) as year, MONTH(created_at) as month, SUM(total) as total')
+            ->where('status', 'Diterima') // Menambahkan filter status 'Diterima'
             ->groupBy('year', 'month')
             ->orderBy('year')
             ->orderBy('month')
@@ -48,6 +49,6 @@ class XIncomeChart extends ChartWidget
 
     protected function getType(): string
     {
-        return 'line'; // atau 'bar' jika ingin menggunakan chart batang
+        return 'line'; // Menggunakan 'line' untuk tampilan chart garis
     }
 }

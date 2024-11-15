@@ -17,6 +17,12 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Orion\FilamentBackup\BackupPlugin;
+use Orion\FilamentGreeter\GreeterPlugin;
+use Orion\FilamentFeedback\FeedbackPlugin;
+use Filament\Actions\Action;
+use Filament\Notifications\Notification;
+use Rmsramos\Activitylog\ActivitylogPlugin;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -28,18 +34,15 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Purple,
             ])
+            ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
-            ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
-            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -53,6 +56,27 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+
+            ->plugins([
+                GreeterPlugin::make()
+                ->message('Selamat Datang di Panel Admin')
+                ->name(", Admin")
+                ->title("Mengkonfigurasi Semua yang dibutuhkan disini") 
+                ->avatar(size: 'w-16 h-16')
+                ->columnSpan('full')
+                ->action(
+                    Action::make('action')
+                        ->label('Click Me')
+                        ->color('danger')
+                        ->icon('heroicon-o-arrow-path')
+                        ->action(function () {
+                            Notification::make()
+                                ->title('Terus Tersenyum')
+                                ->success()
+                                ->send();
+                        })
+                ),
+                    ]);
     }
 }

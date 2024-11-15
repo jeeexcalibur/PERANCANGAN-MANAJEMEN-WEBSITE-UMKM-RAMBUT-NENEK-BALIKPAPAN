@@ -42,6 +42,8 @@
                                         <span class="px-3 py-1 inline-flex leading-5 font-semibold rounded-full bg-yellow-200 text-yellow-800">Diproses</span>
                                     @elseif($transaction->status == 'Dikirim')
                                         <span class="px-3 py-1 inline-flex leading-5 font-semibold rounded-full bg-blue-200 text-blue-800">Dikirimkan</span>
+                                    @elseif($transaction->status == 'Dibatalkan')
+                                        <span class="px-3 py-1 inline-flex leading-5 font-semibold rounded-full bg-red-200 text-red-800">Dibatalkan</span>
                                     @else
                                         <span class="px-3 py-1 inline-flex leading-5 font-semibold rounded-full bg-green-200 text-green-800">Selesai</span>
                                     @endif

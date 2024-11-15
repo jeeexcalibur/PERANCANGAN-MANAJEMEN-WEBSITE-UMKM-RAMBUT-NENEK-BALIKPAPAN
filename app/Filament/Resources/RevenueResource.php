@@ -18,7 +18,7 @@ use App\Filament\Resources\RevenueResource\Widgets\Income;
 class RevenueResource extends Resource
 {
     protected static ?string $model = Transaction::class;
-
+    protected static ?string $navigationGroup = 'Pendapatan & Transaksi';
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
     protected static ?string $navigationLabel = 'Pendapatan';
     protected static ?string $pluralLabel = 'Pendapatan';

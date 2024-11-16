@@ -154,61 +154,124 @@
 
     <!-- Navbar -->
     <header class="shadow-md text-black relative">
-        <div class="container mx-auto flex justify-between items-center py-4 px-6 flex-wrap">
-            <div class="flex items-center">
-                <span class="navbar-brand">Rambut Nenek BPN</span>
+        <nav class="bg-white shadow-md">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <a href="#">
+                    @php
+                        $landingPage = \App\Models\LandingPages::where('image_title', 'Header')->first();
+                    @endphp
+                    @if($landingPage && $landingPage->image_url)
+                        <img src="{{ $landingPage->image_url }}" alt="Rambut Nenek BPN Logo" class="h-12">
+                    @else
+                        <!-- Optional fallback logo or text if image is not found -->
+                        <span class="text-2xl font-bold text-gray-800">Rambut Nenek BPN</span>
+                    @endif
+                </a>
+                <div class="hidden md:flex space-x-8">
+                    <a href="{{ route('home') }}" class="text-gray-600 hover:text-gray-800 transition duration-300 {{ request()->is('home') ? 'text-gray-800 font-semibold' : '' }}">
+                        <i class="fas fa-home mr-2"></i> Home
+                    </a>
+                    <a href="{{ route('home') }}#products" class="text-gray-600 hover:text-gray-800 transition duration-300 {{ request()->is('home') ? 'text-gray-800 font-semibold' : '' }}">
+                        <i class="fas fa-cookie-bite mr-2"></i> Produk
+                    </a>
+                    <a href="{{ route('about') }}" class="text-gray-600 hover:text-gray-800 transition duration-300 {{ request()->is('about') ? 'text-gray-800 font-semibold' : '' }}">
+                        <i class="fas fa-info-circle mr-2"></i> About Us
+                    </a>
+        
+                    @auth
+                        <a href="{{ route('cart.index') }}" class="text-gray-600 hover:text-gray-800 transition duration-300 {{ request()->is('cart') ? 'text-gray-800 font-semibold' : '' }}">
+                            <i class="fas fa-shopping-cart mr-2"></i> Keranjang Belanja
+                        </a>
+                        <a href="{{ route('transactions.index') }}" class="text-gray-600 hover:text-gray-800 transition duration-300 {{ request()->is('transactions') ? 'text-gray-800 font-semibold' : '' }}">
+                            <i class="fas fa-file-invoice-dollar mr-2"></i> Transaksi
+                        </a>
+                        <a href="{{ route('profile') }}" class="text-gray-600 hover:text-gray-800 transition duration-300 {{ request()->is('profile') ? 'text-gray-800 font-semibold' : '' }}">
+                            <i class="fas fa-user mr-2"></i> Profile
+                        </a>
+                    @else
+                        <a href="{{ route('customer.login') }}" class="text-gray-600 hover:text-gray-800 transition duration-300 {{ request()->is('customer/login') ? 'text-gray-800 font-semibold' : '' }}">
+                            <i class="fas fa-sign-in-alt mr-2"></i> Login
+                        </a>
+                    @endauth
+                </div>
+        
+                <div class="hidden md:flex space-x-4">
+                    @auth
+                        <form action="{{ route('customer.logout') }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="text-gray-600 hover:text-gray-800 transition duration-300">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                        </form>
+                    @else
+                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-twitter"></i></a>
+                    @endauth
+                </div>
+        
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-gray-600 focus:outline-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
             </div>
-            <div class="navbar-toggler" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
-            </div>
-            <nav class="flex items-center space-x-6 flex-wrap navbar-menu">
-                <a class="text-lg font-semibold flex items-center {{ request()->is('home') ? 'active-link' : '' }}" href="{{ route('home') }}">
+        
+            <div id="mobile-menu" class="hidden md:hidden">
+                <a href="{{ route('home') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-200">
                     <i class="fas fa-home mr-2"></i> Home
                 </a>
-                <a class="text-lg flex items-center {{ request()->is('home') ? 'active-link' : '' }}" href="{{ route('home') }}#products">
+                <a href="{{ route('home') }}#products" class="block px-4 py-2 text-gray-600 hover:bg-gray-200">
                     <i class="fas fa-cookie-bite mr-2"></i> Produk
                 </a>
-
+        
                 @auth
-                <a class="text-lg flex items-center {{ request()->is('cart') ? 'active-link' : '' }}" href="{{ route('cart.index') }}">
-                    <i class="fas fa-shopping-cart mr-2"></i> Keranjang Belanja
-                </a>
-                <a class="text-lg flex items-center {{ request()->is('transactions') ? 'active-link' : '' }}" href="{{ route('transactions.index') }}">
-                    <i class="fas fa-file-invoice-dollar mr-2"></i> Transaksi
-                </a>
-                <a class="text-lg flex items-center {{ request()->is('about') ? 'active-link' : '' }}" href="{{ route('about') }}">
-                    <i class="fas fa-info-circle mr-2"></i> About Us
-                </a>
-                <a class="text-lg flex items-center {{ request()->is('profile') ? 'active-link' : '' }}" href="{{ route('profile') }}">
-                    <i class="fas fa-user mr-2"></i> Profile
-                </a>
+                    <a href="{{ route('cart.index') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-200">
+                        <i class="fas fa-shopping-cart mr-2"></i> Keranjang Belanja
+                    </a>
+                    <a href="{{ route('transactions.index') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-200">
+                        <i class="fas fa-file-invoice-dollar mr-2"></i> Transaksi
+                    </a>
+                    <a href="{{ route('about') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-200">
+                        <i class="fas fa-info-circle mr-2"></i> About Us
+                    </a>
+                    <a href="{{ route('profile') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-200">
+                        <i class="fas fa-user mr-2"></i> Profile
+                    </a>
                 @else
-                <a class="text-lg flex items-center {{ request()->is('customer/login') ? 'active-link' : '' }}" href="{{ route('customer.login') }}">
-                    <i class="fas fa-sign-in-alt mr-2"></i> Login
-                </a>
+                    <a href="{{ route('customer.login') }}" class="block px-4 py-2 text-gray-600 hover:bg-gray-200">
+                        <i class="fas fa-sign-in-alt mr-2"></i> Login
+                    </a>
                 @endauth
-            </nav>
-            <div class="flex space-x-4 navbar-icons">
-                @auth
-                <form action="{{ route('customer.logout') }}" method="POST" class="inline">
-                    @csrf
-                    <button type="submit" class="text-lg flex items-center">
-                        <i class="fas fa-sign-out-alt mr-2"></i> Logout
-                    </button>
-                </form>
-                @else
-                <a href="#" class="text-lg flex items-center">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" class="text-lg flex items-center">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="#" class="text-lg flex items-center">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                @endauth
+        
+                <div class="flex justify-center space-x-4 py-2">
+                    @auth
+                        <form action="{{ route('customer.logout') }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="text-gray-600 hover:text-gray-800 transition duration-300">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                        </form>
+                    @else
+                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-twitter"></i></a>
+                    @endauth
+                </div>
             </div>
-        </div>
+        </nav>
+        
+        <script>
+            document.getElementById('menu-btn').addEventListener('click', function() {
+                var menu = document.getElementById('mobile-menu');
+                if (menu.classList.contains('hidden')) {
+                    menu.classList.remove('hidden');
+                } else {
+                    menu.classList.add('hidden');
+                }
+            });
+        </script>
+        
     </header>
 
     <!-- Main Content -->
@@ -216,37 +279,64 @@
         @yield('content')
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-[#8b0330] text-white py-8">
-        <div class="container mx-auto">
-            <div class="flex flex-wrap justify-between mb-6">
-                <div class="w-full md:w-1/4 mb-6">
-                    <h2 class="text-2xl font-bold mb-2">Rambut<span class="text-[#A5855F]"> Nenek BPN</span></h2>
-                    <p class="text-sm">Rambut Nenek Balikpapan: Cemilan Legendaris untuk Semua Momen..</p>
-                    <ul class="flex space-x-4 mt-2">
-                        <li><a href="#" class="hover:text-[#A5855F]"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#" class="hover:text-[#A5855F]"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#" class="hover:text-[#A5855F]"><i class="fab fa-twitter"></i></a></li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 mb-6">
-                    <h3 class="text-lg font-semibold mb-2">Link Terkait</h3>
-                    <ul>
-                        <li><a href="{{ route('home') }}" class="hover:text-[#A5855F]">Home</a></li>
-                        <li><a href="{{ route('about') }}" class="hover:text-[#A5855F]">About Us</a></li>
-                        <li><a href="{{ route('home') }}#products" class="hover:text-[#A5855F]">Produk</a></li>
-                        <li><a href="{{ route('cart.index') }}" class="hover:text-[#A5855F]">Keranjang Belanja</a></li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 mb-6">
-                    <h3 class="text-lg font-semibold mb-2">Kontak Kami</h3>
-                    <p>Email: <a href="mailto:info@rambutnenekbpn.com" class="hover:text-[#A5855F]">info@rambutnenekbpn.com</a></p>
-                    <p>Tel: <a href="tel:+621234567890" class="hover:text-[#A5855F]">+62 123 456 7890</a></p>
-                </div>
+<!-- Footer -->
+<footer class="bg-[#8b0330] text-white py-12">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-wrap justify-between mb-8">
+            <div class="w-full md:w-1/4 mb-6">
+                <h2 class="text-3xl font-bold mb-3">
+                    Rambut<span class="text-[#A5855F]"> Nenek BPN</span>
+                </h2>
+                <p class="text-sm mb-4">Rambut Nenek Balikpapan: Cemilan Legendaris untuk Semua Momen.</p>
+                <ul class="flex space-x-6">
+                    <li>
+                        <a href="#" class="text-[#A5855F] hover:text-white transition duration-300">
+                            <i class="fab fa-facebook-f text-2xl"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-[#A5855F] hover:text-white transition duration-300">
+                            <i class="fab fa-instagram text-2xl"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-[#A5855F] hover:text-white transition duration-300">
+                            <i class="fab fa-twitter text-2xl"></i>
+                        </a>
+                    </li>
+                </ul>
             </div>
-            <p class="text-center text-sm">© 2024 Rambut Nenek BPN. Semua hak dilindungi.</p>
+            <div class="w-full md:w-1/4 mb-6">
+                <h3 class="text-lg font-semibold mb-3">Link Terkait</h3>
+                <ul class="space-y-2">
+                    <li><a href="{{ route('home') }}" class="hover:text-[#A5855F] transition duration-300">Home</a></li>
+                    <li><a href="{{ route('about') }}" class="hover:text-[#A5855F] transition duration-300">About Us</a></li>
+                    <li><a href="{{ route('home') }}#products" class="hover:text-[#A5855F] transition duration-300">Produk</a></li>
+                    <li><a href="{{ route('cart.index') }}" class="hover:text-[#A5855F] transition duration-300">Keranjang Belanja</a></li>
+                </ul>
+            </div>
+            <div class="w-full md:w-1/4 mb-6">
+                <h3 class="text-lg font-semibold mb-3">Kontak Kami</h3>
+                <p>Email: <a href="mailto:info@rambutnenekbpn.com" class="hover:text-[#A5855F] transition duration-300">info@rambutnenekbpn.com</a></p>
+                <p>Tel: <a href="tel:+621234567890" class="hover:text-[#A5855F] transition duration-300">+62 123 456 7890</a></p>
+            </div>
         </div>
-    </footer>
+
+        <!-- Newsletter Subscription -->
+        <div class="text-center mb-6">
+            <h3 class="text-lg font-semibold mb-3">Berlangganan Newsletter</h3>
+            <p class="text-sm mb-4">Dapatkan informasi terbaru tentang produk dan promo kami langsung di inbox Anda.</p>
+            <form class="flex justify-center space-x-4">
+                <input type="email" placeholder="Masukkan email Anda" class="px-4 py-2 rounded-l-md text-gray-700 w-64" required>
+                <button type="submit" class="bg-[#A5855F] text-white px-6 py-2 rounded-r-md hover:bg-[#8b0330] transition duration-300">Subscribe</button>
+            </form>
+        </div>
+
+        <!-- Footer Bottom -->
+        <p class="text-center text-sm mt-8">© 2024 Rambut Nenek BPN. Semua hak dilindungi.</p>
+    </div>
+</footer>
+
 
     @livewireScripts
     <script>

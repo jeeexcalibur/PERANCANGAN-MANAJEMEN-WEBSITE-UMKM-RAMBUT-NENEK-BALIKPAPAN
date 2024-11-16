@@ -2,127 +2,132 @@
 
 @section('content')
 <style>
-    body {
-             font-family: 'Roboto', sans-serif;
-         }
- 
-         .fade-in {
-             animation: fadeIn 2s ease-in-out;
-         }
- 
-         @keyframes fadeIn {
-             from {
-                 opacity: 0;
-             }
-             to {
-                 opacity: 1;
-             }
-         }
- 
-         .slide-in {
-             animation: slideIn 2s ease-in-out;
-         }
- 
-         @keyframes slideIn {
-             from {
-                 transform: translateX(-100%);
-             }
-             to {
-                 transform: translateX(0);
-             }
-         }
- 
-         .moving-background {
-             background: url('/images/about.jpg') repeat;
-             animation: moveBackground 10s linear infinite;
-             opacity: 0.1;
-         }
- 
-         @keyframes moveBackground {
-             from {
-                 background-position: 0 0;
-             }
-             to {
-                 background-position: 100% 0;
-             }
-         }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .text-white {
+        color: white;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-5xl {
+        font-size: 3rem;
+    }
+
+    .font-bold {
+        font-weight: 700;
+    }
+
+    .font-semibold {
+        font-weight: 600;
+    }
+
+    .text-lg {
+        font-size: 1.125rem;
+    }
+
+    .text-3xl {
+        font-size: 1.875rem;
+    }
+
+    .text-2xl {
+        font-size: 1.5rem;
+    }
+
+    .mb-4 {
+        margin-bottom: 1rem;
+    }
+
+    .mb-6 {
+        margin-bottom: 1.5rem;
+    }
+
+    .mb-8 {
+        margin-bottom: 2rem;
+    }
+
+    .mb-10 {
+        margin-bottom: 2.5rem;
+    }
+
+    .mb-16 {
+        margin-bottom: 4rem;
+    }
+
+    .rounded-xl {
+        border-radius: 1rem;
+    }
+
+    .shadow-xl {
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
    </style>
 
-<section class="py-16 relative">
-    <div class="moving-background absolute inset-0 z-0">
+<section id="about-us" class="about-us py-20">
+    @php
+        $landingPage = \App\Models\LandingPages::where('image_title', 'Landing')->first();
+    @endphp
+
+    <div class="container mx-auto px-6 py-16 text-center">
+        <!-- Title -->
+        <h2 class="text-5xl font-bold mb-8">Tentang Kami</h2>
+
+        <!-- Deskripsi Perusahaan -->
+        <div class="flex flex-col md:flex-row justify-between items-center gap-12 mb-16">
+            <div class="md:w-1/2">
+                <h3 class="text-3xl font-semibold mb-4">Siapa Kami?</h3>
+                <p class="text-lg mb-6">
+                    Kami adalah perusahaan yang berkomitmen untuk memberikan solusi terbaik dalam memenuhi kebutuhan Anda. 
+                    Dengan produk berkualitas tinggi dan pelayanan yang ramah, kami hadir untuk membuat hidup Anda lebih mudah.
+                </p>
+                <p class="text-lg">
+                    Dari hari pertama kami didirikan, kami selalu berusaha untuk memberikan layanan yang terbaik dan inovatif. 
+                    Tujuan kami adalah membangun hubungan jangka panjang dengan pelanggan kami, dan menjadi mitra terpercaya untuk kebutuhan Anda.
+                </p>
+            </div>
+
+            <div class="md:w-1/2">
+                @php
+                $landingPage = \App\Models\LandingPages::where('image_title', 'About')->first();
+            @endphp
+                <img src="{{ $landingPage->image_url }}" 
+                    alt="Tentang perusahaan" class="rounded-xl shadow-xl w-full h-auto object-cover" />
+            </div>
+        </div>
+
+        <!-- Misi dan Visi -->
+        <div class="mb-16">
+            <h3 class="text-3xl font-semibold mb-4">Misi dan Visi Kami</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <div class="flex flex-col items-center">
+                    <h4 class="text-2xl font-bold mb-2">Misi</h4>
+                    <p class="text-lg text-center">
+                        Misi kami adalah menyediakan produk dan layanan yang mengutamakan kualitas dan kepuasan pelanggan, 
+                        serta terus berinovasi untuk memenuhi harapan dan kebutuhan pasar yang terus berkembang.
+                    </p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <h4 class="text-2xl font-bold mb-2">Visi</h4>
+                    <p class="text-lg text-center">
+                        Visi kami adalah menjadi pemimpin pasar dalam industri ini, menawarkan solusi yang relevan dan berkelanjutan 
+                        untuk setiap pelanggan, serta berperan aktif dalam pembangunan sosial dan ekonomi.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA - Hubungi Kami -->
+        <div class="flex justify-center">
+            <a href="#contact" class="py-4 px-10 bg-gradient-to-r from-purple-600 to-red-600 text-white rounded-lg shadow-lg 
+                transform hover:scale-105 transition duration-300">
+                Hubungi Kami
+            </a>
+        </div>
     </div>
-    <div class="relative z-10 container mx-auto text-center">
-     <h2 class="text-3xl font-bold mb-8 fade-in">
-      About Us
-     </h2>
-     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div class="p-6">
-       <img alt="Our Story" class="w-full h-64 object-cover rounded-lg shadow-lg slide-in" height="300" src="https://storage.googleapis.com/a1aa/image/FL3jlHJRSW5bCZAshe5cuR9wlilEgF3tPtqyjvQIRLuFjpxJA.jpg" width="400"/>
-      </div>
-      <div class="p-6 flex flex-col justify-center">
-       <h3 class="text-xl font-bold mb-4">
-        Our Story
-       </h3>
-       <p class="text-gray-700 mb-4">
-        Cake Shop was founded with the passion to create the most delicious and beautiful cakes and pastries. Our journey started in a small kitchen, and now we have grown into a beloved bakery known for our quality and creativity.
-       </p>
-       <p class="text-gray-700 mb-4">
-        We believe in using the finest ingredients and traditional baking techniques to bring you the best flavors and textures. Our team of skilled bakers and decorators work tirelessly to ensure every product is a masterpiece.
-       </p>
-      </div>
-     </div>
-     <div class="mt-16">
-      <h3 class="text-2xl font-bold mb-8 fade-in">
-       Meet Our Team
-      </h3>
-      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
-       <div class="bg-white p-6 rounded-lg shadow-lg">
-        <img alt="Team Member 1" class="w-32 h-32 object-cover rounded-full mx-auto mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/dAfwje27LsiZX03iK1hSsql85oRh5ZYvD0nZGzKR0rYJGTjTA.jpg" width="100"/>
-        <h4 class="text-xl font-bold mb-2">
-         John Doe
-        </h4>
-        <p class="text-gray-700">
-         Head Baker
-        </p>
-       </div>
-       <div class="bg-white p-6 rounded-lg shadow-lg">
-        <img alt="Team Member 2" class="w-32 h-32 object-cover rounded-full mx-auto mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/b2l5Drf9fxqNOkYCh62XN8XLYZVgHku5mC3vUURP79EMGTjTA.jpg" width="100"/>
-        <h4 class="text-xl font-bold mb-2">
-         Jane Smith
-        </h4>
-        <p class="text-gray-700">
-         Pastry Chef
-        </p>
-       </div>
-       <div class="bg-white p-6 rounded-lg shadow-lg">
-        <img alt="Team Member 3" class="w-32 h-32 object-cover rounded-full mx-auto mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/FL3jlHJRSW5bCZAshe5cuR9wlilEgF3tPtqyjvQIRLuFjpxJA.jpg" width="100"/>
-        <h4 class="text-xl font-bold mb-2">
-         Emily Johnson
-        </h4>
-        <p class="text-gray-700">
-         Cake Decorator
-        </p>
-       </div>
-       <div class="bg-white p-6 rounded-lg shadow-lg">
-        <img alt="Team Member 4" class="w-32 h-32 object-cover rounded-full mx-auto mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/FL3jlHJRSW5bCZAshe5cuR9wlilEgF3tPtqyjvQIRLuFjpxJA.jpg" width="100"/>
-        <h4 class="text-xl font-bold mb-2">
-         Michael Brown
-        </h4>
-        <p class="text-gray-700">
-         Assistant Baker
-        </p>
-       </div>
-       <div class="bg-white p-6 rounded-lg shadow-lg">
-        <img alt="Team Member 5" class="w-32 h-32 object-cover rounded-full mx-auto mb-4" height="100" src="https://storage.googleapis.com/a1aa/image/FL3jlHJRSW5bCZAshe5cuR9wlilEgF3tPtqyjvQIRLuFjpxJA.jpg" width="100"/>
-        <h4 class="text-xl font-bold mb-2">
-         Sarah Lee
-        </h4>
-        <p class="text-gray-700">
-         Customer Service
-        </p>
-       </div>
-      </div>
-     </div>
-    </div>
-   </section>
+</section>
 @endsection

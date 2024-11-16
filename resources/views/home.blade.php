@@ -46,10 +46,22 @@
     </div>
 </section>
 
-<!-- Product Grid -->
+{{-- Product Grid --}}
 <section id="products" class="py-16 bg-gray-50">
     <div class="container mx-auto px-4 sm:px-6 md:px-8">
         <h2 class="text-4xl font-semibold text-center mb-12">Produk Terlaris Kami</h2>
+
+        <!-- Filter Section -->
+        <div class="mb-8 text-center">
+            <form method="GET" action="{{ route('home') }}">
+                <select name="sort_by" class="p-2 border border-gray-300 rounded">
+                    <option value="asc" {{ request('sort_by') == 'asc' ? 'selected' : '' }}>Harga: Termurah ke Termahal</option>
+                    <option value="desc" {{ request('sort_by') == 'desc' ? 'selected' : '' }}>Harga: Termahal ke Termurah</option>
+                </select>
+                <button type="submit" class="ml-4 py-2 px-6 bg-pink-600 text-white rounded">Terapkan Filter</button>
+            </form>
+        </div>
+
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             @foreach($products as $product)
             <div class="relative bg-white p-6 rounded-lg shadow-md transition-transform transform hover:scale-105 duration-300 flex flex-col h-full">
@@ -76,35 +88,34 @@
     </div>
 </section>
 
+
 <!-- Testimonials Section -->
 <section class="testimonials py-20 bg-gray-100">
     <div class="container mx-auto text-center">
         <h2 class="text-4xl font-semibold mb-12" style="color: #8b0330;">Apa Kata Pelanggan Kami</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            <div class="testimonial bg-white p-8 rounded-lg shadow-lg transition-transform transform hover:scale-105">
-                <div class="relative mb-4">
-                    <img src="{{ asset('assets/images/gallery-img-06.jpg') }}" alt="Customer A" class="w-16 h-16 rounded-full border-4 border-purple-600 mx-auto">
+            @foreach($testimonials as $testimonial)
+                <div class="testimonial bg-white p-8 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+                    <div class="relative mb-4">
+                        <!-- Gambar Testimonial dengan ukuran yang konsisten dan object-fit cover -->
+                        @if($testimonial->image)
+                            <img src="{{ asset('storage/' . $testimonial->image) }}" 
+                                 alt="{{ $testimonial->customer_name }}" 
+                                 class="w-24 h-24 rounded-full border-4 border-purple-600 mx-auto object-cover">
+                        @else
+                            <img src="{{ asset('images/default.png') }}" 
+                                 alt="Default Image" 
+                                 class="w-24 h-24 rounded-full border-4 border-purple-600 mx-auto object-cover">
+                        @endif
+                    </div>
+                    <p class="italic text-lg">"{{ $testimonial->testimonial }}"</p>
+                    <p class="mt-4 font-semibold text-lg">- {{ $testimonial->customer_name }}</p>
                 </div>
-                <p class="italic">"Pelayanan yang luar biasa dan produk berkualitas tinggi!"</p>
-                <p class="mt-4 font-semibold">- Pelanggan A</p>
-            </div>
-            <div class="testimonial bg-white p-8 rounded-lg shadow-lg transition-transform transform hover:scale-105">
-                <div class="relative mb-4">
-                    <img src="{{ asset('assets/images/gallery-img-06.jpg') }}" alt="Customer B" class="w-16 h-16 rounded-full border-4 border-purple-600 mx-auto">
-                </div>
-                <p class="italic">"Pengiriman cepat dan dukungan pelanggan yang sangat baik!"</p>
-                <p class="mt-4 font-semibold">- Pelanggan B</p>
-            </div>
-            <div class="testimonial bg-white p-8 rounded-lg shadow-lg transition-transform transform hover:scale-105">
-                <div class="relative mb-4">
-                    <img src="{{ asset('assets/images/gallery-img-06.jpg') }}" alt="Customer C" class="w-16 h-16 rounded-full border-4 border-purple-600 mx-auto">
-                </div>
-                <p class="italic">"Saya suka berbelanja di sini, selalu puas!"</p>
-                <p class="mt-4 font-semibold">- Pelanggan C</p>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
+
 
 
 <!-- Customer Service Button -->

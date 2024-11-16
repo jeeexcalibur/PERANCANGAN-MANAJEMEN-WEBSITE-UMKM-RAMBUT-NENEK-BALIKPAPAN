@@ -18,8 +18,9 @@ use Filament\Forms\Components\TextInput;
 class LandingPagesResource extends Resource
 {
     protected static ?string $model = LandingPages::class;
-
+    protected static ?string $navigationGroup = 'Konten';
     protected static ?string $navigationIcon = 'heroicon-o-photo';
+    protected static ?string $label = 'Asset Website';
 
     public static function form(Form $form): Form
     {

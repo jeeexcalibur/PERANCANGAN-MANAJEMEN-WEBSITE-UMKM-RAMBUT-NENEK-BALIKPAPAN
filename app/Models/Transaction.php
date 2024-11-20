@@ -30,8 +30,16 @@ class Transaction extends Model
         return $this->hasMany(TransactionItem::class);
     }
 
-    public function product()
+    public function products()
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasManyThrough(
+            Product::class,
+            TransactionItem::class,
+            'transaction_id', // Foreign key di TransactionItem
+            'id',             // Foreign key di Product
+            'id',             // Local key di Transaction
+            'product_id'      // Local key di TransactionItem
+        );
     }
+    
 }

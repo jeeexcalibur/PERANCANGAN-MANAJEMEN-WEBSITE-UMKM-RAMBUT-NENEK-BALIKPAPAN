@@ -22,7 +22,7 @@ class RevenueController extends Controller
         header('Content-Disposition: attachment; filename="' . $csvFileName . '"');
 
         // Tulis header kolom
-        fputcsv($handle, ['ID', 'Tanggal', 'Total Pendapatan', 'Pelanggan', 'Produk Terlaris', 'Produk Tersedikit Terjual']);
+        fputcsv($handle, ['ID', 'Tanggal', 'Total Pendapatan', 'Pelanggan']);
 
         // Tulis data
         foreach ($revenues as $revenue) {
@@ -31,8 +31,6 @@ class RevenueController extends Controller
                 $revenue->created_at,
                 $revenue->total,
                 $revenue->user->name, // Pastikan relasi user ada
-                $revenue->most_sold_product,
-                $revenue->least_sold_product,
             ]);
         }
 

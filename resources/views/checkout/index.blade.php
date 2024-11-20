@@ -92,22 +92,29 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     document.getElementById('checkoutForm').addEventListener('submit', function(event) {
-        const phone = document.getElementById('phone').value;
-        const paymentMethod = document.getElementById('payment_method').value;
-        const shippingAddress = document.getElementById('shipping_address').value;
-        const paymentProof = document.getElementById('payment_proof').value;
+        const phone = document.getElementById('phone').value.trim();
+        const paymentMethod = document.getElementById('payment_method').value.trim();
+        const shippingAddress = document.getElementById('shipping_address').value.trim();
+        const paymentProof = document.getElementById('payment_proof').value.trim();
 
-        if (!phone || !paymentMethod || !shippingAddress || !paymentProof) {
+        if (!phone || phone.length < 10 || isNaN(phone)) {
+            event.preventDefault();
+            swal("Error!", "Nomor handphone harus berisi minimal 10 angka dan hanya angka!", "error");
+            return;
+        }
+
+        if (!paymentMethod || !shippingAddress || !paymentProof) {
             event.preventDefault();
             swal("Error!", "Silakan lengkapi semua kolom sebelum melanjutkan!", "error");
-        } else {
-            swal({
-                title: "Proses Pembayaran",
-                text: "Pembayaran berhasil diproses!",
-                icon: "success",
-                button: "OK",
-            });
+            return;
         }
+
+        swal({
+            title: "Proses Pembayaran",
+            text: "Pembayaran berhasil diproses!",
+            icon: "success",
+            button: "OK",
+        });
     });
 
     function togglePaymentDetails() {

@@ -9,11 +9,6 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\Transaction;
 use App\Filament\Widgets\ProductStatsOverview;
-use App\Filament\Widgets\XIncomeChart;
-use App\Filament\Resources\RevenueResource\Widgets\Income;
-
-
-
 
 class RevenueResource extends Resource
 {
@@ -46,12 +41,12 @@ class RevenueResource extends Resource
                         Forms\Components\DatePicker::make('from')->label('Dari'),
                         Forms\Components\DatePicker::make('until')->label('Sampai'),
                     ])
+                    ->label('Filter')
                     ->query(function (Builder $query, array $data) {
                         return $query
                             ->when($data['from'], fn($q) => $q->whereDate('created_at', '>=', $data['from']))
                             ->when($data['until'], fn($q) => $q->whereDate('created_at', '<=', $data['until']));
                     }),
-                // Tambahkan filter per minggu atau bulan sesuai kebutuhan
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -61,19 +56,18 @@ class RevenueResource extends Resource
             ]);
     }
 
+    public static function getEloquentQuery(): Builder
+    {
+        // Filter hanya data dengan status 'Diterima'
+        return parent::getEloquentQuery()->where('status', 'Diterima');
+    }
+
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListRevenues::route('/'),
         ];
     }
-
-    // public static function getWidgets(): array
-    // {
-    //     return [
-    //         Income::class,
-    //     ];
-    // }
 
     public static function getWidgets(): array
     {

@@ -282,60 +282,72 @@
 <!-- Footer -->
 <footer class="bg-[#8b0330] text-white py-12">
     <div class="container mx-auto px-4">
-        <div class="flex flex-wrap justify-between mb-8">
-            <div class="w-full md:w-1/4 mb-6">
-                <h2 class="text-3xl font-bold mb-3">
-                    Rambut<span class="text-[#A5855F]"> Nenek BPN</span>
-                </h2>
-                <p class="text-sm mb-4">Rambut Nenek Balikpapan: Cemilan Legendaris untuk Semua Momen.</p>
-                <ul class="flex space-x-6">
-                    <li>
-                        <a href="#" class="text-[#A5855F] hover:text-white transition duration-300">
-                            <i class="fab fa-facebook-f text-2xl"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-[#A5855F] hover:text-white transition duration-300">
-                            <i class="fab fa-instagram text-2xl"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="text-[#A5855F] hover:text-white transition duration-300">
-                            <i class="fab fa-twitter text-2xl"></i>
-                        </a>
-                    </li>
-                </ul>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- About Section -->
+            <div>
+                <h3 class="text-2xl font-bold mb-4">
+                    Rambut<span class="text-[#FFD700]"> Nenek BPN</span>
+                </h3>
+                <p class="text-sm mb-4">
+                    Rambut Nenek Balikpapan adalah cemilan tradisional yang melegenda. Dibuat dengan cinta, untuk menemani setiap momen manismu.
+                </p>
+                <div class="flex space-x-4 mt-4">
+                    <a href="#" class="hover:text-[#FFD700] transition duration-300">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                    </a>
+                    <a href="#" class="hover:text-[#FFD700] transition duration-300">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="hover:text-[#FFD700] transition duration-300">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                </div>
             </div>
-            <div class="w-full md:w-1/4 mb-6">
-                <h3 class="text-lg font-semibold mb-3">Link Terkait</h3>
+
+            <!-- Links Section -->
+            <div>
+                <h4 class="text-xl font-semibold mb-4">Navigasi</h4>
                 <ul class="space-y-2">
-                    <li><a href="{{ route('home') }}" class="hover:text-[#A5855F] transition duration-300">Home</a></li>
-                    <li><a href="{{ route('about') }}" class="hover:text-[#A5855F] transition duration-300">About Us</a></li>
-                    <li><a href="{{ route('home') }}#products" class="hover:text-[#A5855F] transition duration-300">Produk</a></li>
-                    <li><a href="{{ route('cart.index') }}" class="hover:text-[#A5855F] transition duration-300">Keranjang Belanja</a></li>
+                    <li>
+                        <a href="{{ route('home') }}" class="hover:text-[#FFD700] transition duration-300">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('home') }}#products" class="hover:text-[#FFD700] transition duration-300">
+                            Produk
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('about') }}" class="hover:text-[#FFD700] transition duration-300">
+                            About Us
+                        </a>
+                    </li>
                 </ul>
             </div>
-            <div class="w-full md:w-1/4 mb-6">
-                <h3 class="text-lg font-semibold mb-3">Kontak Kami</h3>
-                <p>Email: <a href="mailto:info@rambutnenekbpn.com" class="hover:text-[#A5855F] transition duration-300">info@rambutnenekbpn.com</a></p>
-                <p>Tel: <a href="tel:+621234567890" class="hover:text-[#A5855F] transition duration-300">+62 123 456 7890</a></p>
+
+            <!-- Contact Section -->
+            <div>
+                <h4 class="text-xl font-semibold mb-4">Hubungi Kami</h4>
+                <p class="text-sm">
+                    <i class="fas fa-map-marker-alt mr-2"></i> Balikpapan, Kalimantan Timur
+                </p>
+                <p class="text-sm mt-2">
+                    <i class="fas fa-phone-alt mr-2"></i> +62 812-3456-7890
+                </p>
+                <p class="text-sm mt-2">
+                    <i class="fas fa-envelope mr-2"></i> info@rambutnenekbpn.com
+                </p>
             </div>
         </div>
 
-        <!-- Newsletter Subscription -->
-        <div class="text-center mb-6">
-            <h3 class="text-lg font-semibold mb-3">Berlangganan Newsletter</h3>
-            <p class="text-sm mb-4">Dapatkan informasi terbaru tentang produk dan promo kami langsung di inbox Anda.</p>
-            <form class="flex justify-center space-x-4">
-                <input type="email" placeholder="Masukkan email Anda" class="px-4 py-2 rounded-l-md text-gray-700 w-64" required>
-                <button type="submit" class="bg-[#A5855F] text-white px-6 py-2 rounded-r-md hover:bg-[#8b0330] transition duration-300">Subscribe</button>
-            </form>
+        <!-- Bottom Bar -->
+        <div class="border-t border-gray-700 mt-8 pt-4 text-center text-sm">
+            <p>&copy; 2024 Rambut Nenek BPN. All Rights Reserved. Crafted with ❤️ in Balikpapan.</p>
         </div>
-
-        <!-- Footer Bottom -->
-        <p class="text-center text-sm mt-8">© 2024 Rambut Nenek BPN. Semua hak dilindungi.</p>
     </div>
 </footer>
+
 
 
     @livewireScripts

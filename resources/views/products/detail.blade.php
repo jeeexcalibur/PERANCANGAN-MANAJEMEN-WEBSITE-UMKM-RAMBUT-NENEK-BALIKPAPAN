@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<html>
+<html lang="en">
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
@@ -53,16 +53,25 @@
                 transform: translateY(0);
             }
         }
+
+        /* Custom Background Styles */
+        .bg-detail-image {
+            background-image: url('{{ asset('assets/images/detail.png') }}');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.6;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
-    <div class="max-w-6xl mx-auto p-4 flex flex-col md:flex-row">
+    <div class="relative max-w-6xl mx-auto p-4 md:p-6 flex flex-col md:flex-row">
         <!-- Left Image Section -->
-        <div class="w-full md:w-1/2 image-hover fade-in">
+        <div class="w-full md:w-1/2 image-hover fade-in mb-6 md:mb-0">
             <img alt="{{ $product->name }}" height="800" src="{{ asset('storage/' . $product->image) }}" width="600" class="rounded-lg shadow-lg"/>
         </div>
+        
         <!-- Right Details Section -->
-        <div class="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md fade-in">
+        <div class="w-full md:w-1/2 bg-white p-6 rounded-lg shadow-md fade-in relative">
             <h1 class="text-3xl font-bold mb-2">{{ $product->name }}</h1>
             <span class="bg-yellow-400 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">Best Seller</span>
             <div class="mt-4">
@@ -96,7 +105,8 @@
             </div>
         </div>
     </div>
-
+    
+    <!-- Background Image of Person Snacking with opacity -->
     <script>
         document.getElementById('increase-quantity').addEventListener('click', function() {
             var quantityInput = document.getElementById('quantity');

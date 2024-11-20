@@ -30,7 +30,7 @@ class CheckoutController extends Controller
         $request->validate([
             'payment_method' => 'required|in:QRIS,Transfer Bank',
             'payment_proof' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'phone' => 'required|string|max:15', // Validasi untuk nomor handphone
+            'phone' => 'required|numeric|digits_between:10,15',
         ]);
 
         $carts = Cart::where('user_id', Auth::id())->with('product')->get();

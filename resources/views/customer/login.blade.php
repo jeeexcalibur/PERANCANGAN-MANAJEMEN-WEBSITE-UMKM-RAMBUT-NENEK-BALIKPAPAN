@@ -261,14 +261,14 @@
         <div class="form-container sign-up">
             <form method="POST" action="{{ route('customer.register') }}">
                 @csrf
-                <h1>Create Account</h1>
+                <h1>Buat Akun</h1>
                 <div class="social-icons">
                     <a href="{{ route('google.login') }}" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
-                <span>or use your email for registration</span>
+                <span>atau gunakan email untuk daftar</span>
                 <input type="text" id="name" name="name" placeholder="Name" required>
                 <input type="email" id="email" name="email" placeholder="Email" required>
                 <input type="password" id="password" name="password" placeholder="Password" required>
@@ -283,15 +283,12 @@
                 <h1>Sign In</h1>
                 <div class="social-icons">
                     <a href="{{ route('google.login') }}" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                 </div>
-                <span>or use your email for login</span>
+                <span>atau gunakan email untuk login</span>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit">Sign In</button>
-                <p>Don't have an account? <a href="#" onclick="toggleForm('register')">Sign Up</a></p>
+                <p>Belum Mempunyai Akun? <a href="#" onclick="toggleForm('register')">Daftar disini</a></p>
             </form>
         </div>
         <div class="toggle-container">

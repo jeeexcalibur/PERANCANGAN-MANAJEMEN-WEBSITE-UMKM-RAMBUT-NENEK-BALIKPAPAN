@@ -206,7 +206,6 @@
                     @else
                         <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-twitter"></i></a>
                     @endauth
                 </div>
         
@@ -297,9 +296,6 @@
                     </a>
                     <a href="#" class="hover:text-[#FFD700] transition duration-300">
                         <i class="fab fa-instagram text-xl"></i>
-                    </a>
-                    <a href="#" class="hover:text-[#FFD700] transition duration-300">
-                        <i class="fab fa-twitter text-xl"></i>
                     </a>
                 </div>
             </div>

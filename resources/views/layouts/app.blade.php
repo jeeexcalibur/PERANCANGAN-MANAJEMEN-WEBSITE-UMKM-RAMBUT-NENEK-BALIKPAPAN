@@ -343,7 +343,7 @@
 
         <!-- Bottom Bar -->
         <div class="border-t border-gray-700 mt-8 pt-4 text-center text-sm">
-            <p>&copy; 2024 Rambut Nenek BPN. All Rights Reserved. Crafted with ❤️ in Balikpapan.</p>
+            <p>&copy; {{ date('Y') }} Rambut Nenek BPN. All Rights Reserved. Crafted with ❤️ in Balikpapan.</p>
         </div>
     </div>
 </footer>

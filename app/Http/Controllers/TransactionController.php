@@ -10,11 +10,18 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        $user = Auth::user(); // Mendapatkan pengguna yang sedang login
-        $transactions = Transaction::with('items.product') // Memuat relasi item dan produk
+        $user = Auth::user();
+        $transactions = Transaction::with('items.product')
             ->where('user_id', $user->id)
-            ->get(); // Mengambil transaksi berdasarkan pengguna
-        
+            ->get()
+            ->map(function ($transaction) {
+                // Gabungkan nama produk terkait
+                $transaction->product_names = $transaction->items->map(function ($item) {
+                    return $item->product->name;
+                })->join(', '); // Gabungkan nama produk dengan koma
+                return $transaction;
+            });
+    
         return view('transactions.index', compact('transactions'));
     }
     

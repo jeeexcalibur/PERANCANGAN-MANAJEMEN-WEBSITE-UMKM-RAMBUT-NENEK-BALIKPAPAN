@@ -204,8 +204,7 @@
                             </button>
                         </form>
                     @else
-                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/rambutnenek_bpn/profilecard/?igsh=MTJ2ejA5a3owbmNycg==" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-instagram"></i></a>
                     @endauth
                 </div>
         
@@ -252,9 +251,9 @@
                             </button>
                         </form>
                     @else
-                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-twitter"></i></a>
+                        
+                        <a href="https://www.instagram.com/rambutnenek_bpn/profilecard/?igsh=MTJ2ejA5a3owbmNycg==" class="text-gray-600 hover:text-gray-800 transition duration-300"><i class="fab fa-instagram"></i></a>
+                        
                     @endauth
                 </div>
             </div>
@@ -291,10 +290,7 @@
                     Rambut Nenek Balikpapan adalah cemilan tradisional yang melegenda. Dibuat dengan cinta, untuk menemani setiap momen manismu.
                 </p>
                 <div class="flex space-x-4 mt-4">
-                    <a href="#" class="hover:text-[#FFD700] transition duration-300">
-                        <i class="fab fa-facebook-f text-xl"></i>
-                    </a>
-                    <a href="#" class="hover:text-[#FFD700] transition duration-300">
+                    <a href="https://www.instagram.com/rambutnenek_bpn/profilecard/?igsh=MTJ2ejA5a3owbmNycg==" class="hover:text-[#FFD700] transition duration-300">
                         <i class="fab fa-instagram text-xl"></i>
                     </a>
                 </div>
@@ -329,10 +325,10 @@
                     <i class="fas fa-map-marker-alt mr-2"></i> Balikpapan, Kalimantan Timur
                 </p>
                 <p class="text-sm mt-2">
-                    <i class="fas fa-phone-alt mr-2"></i> +62 812-3456-7890
+                    <i class="fas fa-phone-alt mr-2"></i> +6285787716285
                 </p>
                 <p class="text-sm mt-2">
-                    <i class="fas fa-envelope mr-2"></i> info@rambutnenekbpn.com
+                    <i class="fas fa-envelope mr-2"></i> annisarahmadani97@gmail.com
                 </p>
             </div>
         </div>

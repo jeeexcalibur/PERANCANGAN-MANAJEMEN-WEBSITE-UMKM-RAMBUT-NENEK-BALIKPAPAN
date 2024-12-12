@@ -90,14 +90,14 @@
                     Tujuan kami adalah membangun hubungan jangka panjang dengan pelanggan kami, dan menjadi mitra terpercaya untuk kebutuhan Anda.
                 </p>
             </div>
-
             <div class="md:w-1/2">
                 @php
-                $landingPage = \App\Models\LandingPages::where('image_title', 'About')->first();
-            @endphp
-                <img src="{{ $landingPage->image_url }}" 
+                    $landingPage = \App\Models\LandingPages::where('image_title', 'About')->first();
+                @endphp
+                <img src="{{ $landingPage && $landingPage->image_url ? $landingPage->image_url : asset('assets/images/default.jpg') }}" 
                     alt="Tentang perusahaan" class="rounded-xl shadow-xl w-full h-auto object-cover" />
             </div>
+            
         </div>
 
         <!-- Misi dan Visi -->

@@ -3,10 +3,11 @@
 @section('content')
 <!-- Hero Section -->
 <section class="hero relative bg-cover bg-center text-white py-24" 
-            @php
-                $landingPage = \App\Models\LandingPages::where('image_title', 'Landing')->first();
-            @endphp
-                style="background-image: url('{{ $landingPage->image_url }}');">
+    @php
+        $landingPage = \App\Models\LandingPages::where('image_title', 'Landing')->first();
+    @endphp
+    style="background-image: url('{{ $landingPage && $landingPage->image_url ? $landingPage->image_url : asset('assets/images/test.jpg') }}');">
+
     <div class="absolute inset-0 bg-black opacity-40"></div>
     <div class="container mx-auto text-center relative z-10">
         <h1 class="text-5xl md:text-6xl font-bold leading-tight animate-typing">Manisnya Tradisi, Nikmatnya Setiap Gigitan!</h1>

@@ -19,6 +19,7 @@ class UserResource extends Resource
     protected static ?string $navigationGroup = 'User';
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
+
     public static function form(Form $form): Form
     {
         return $form
@@ -33,10 +34,7 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('password')
                     ->password()
                     ->required()
-                    ->maxLength(255),    
-                Forms\Components\Select::make('role')
-                    ->required()
-                    ->options(User::ROLES),
+                    ->maxLength(255),
             ]);
     }
 
@@ -47,16 +45,6 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('role')
                     ->searchable(),
             ])
             ->filters([

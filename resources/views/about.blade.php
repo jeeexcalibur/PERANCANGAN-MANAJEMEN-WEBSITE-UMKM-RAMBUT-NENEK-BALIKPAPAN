@@ -2,6 +2,7 @@
 
 @section('content')
 <style>
+     
     .container {
         max-width: 1200px;
         margin: 0 auto;
@@ -12,7 +13,7 @@
     }
 
     .text-center {
-        text-align: center;
+        text-align: center, justify;
     }
 
     .text-5xl {
@@ -78,16 +79,15 @@
         <h2 class="text-5xl font-bold mb-8">Tentang Kami</h2>
 
         <!-- Deskripsi Perusahaan -->
-        <div class="flex flex-col md:flex-row justify-between items-center gap-12 mb-16">
+        <div class="flex flex-col md:flex-row justify-center items-center gap-12 mb-16">
             <div class="md:w-1/2">
                 <h3 class="text-3xl font-semibold mb-4">Siapa Kami?</h3>
-                <p class="text-lg mb-6">
+                <p class="text-lg mb-6 text-justify">
                     Kami adalah perusahaan yang berkomitmen untuk memberikan solusi terbaik dalam memenuhi kebutuhan Anda. 
                     Dengan produk berkualitas tinggi dan pelayanan yang ramah, kami hadir untuk membuat hidup Anda lebih mudah.
                 </p>
-                <p class="text-lg">
-                    Dari hari pertama kami didirikan, kami selalu berusaha untuk memberikan layanan yang terbaik dan inovatif. 
-                    Tujuan kami adalah membangun hubungan jangka panjang dengan pelanggan kami, dan menjadi mitra terpercaya untuk kebutuhan Anda.
+                <p class="text-lg text-justify">
+                Rambut Nenek BPN berdiri sejak 2016 di kota Balikpapan, berawal dari keinginan untuk menghadirkan kembali nostalgia jajanan tradisional "rambut nenek" yang jarang ditemui di Balikpapan saat itu.
                 </p>
             </div>
             <div class="md:w-1/2">
@@ -107,26 +107,19 @@
                 <div class="flex flex-col items-center">
                     <h4 class="text-2xl font-bold mb-2">Misi</h4>
                     <p class="text-lg text-center">
-                        Misi kami adalah menyediakan produk dan layanan yang mengutamakan kualitas dan kepuasan pelanggan, 
-                        serta terus berinovasi untuk memenuhi harapan dan kebutuhan pasar yang terus berkembang.
+                    Menghadirkan camilan tradisional Rambut Nenek yang autentik, berkualitas tinggi, 
+                    dan ramah lingkungan untuk melestarikan budaya kuliner lokal sekaligus mendukung pemberdayaan ekonomi masyarakat Balikpapan.
                     </p>
                 </div>
                 <div class="flex flex-col items-center">
                     <h4 class="text-2xl font-bold mb-2">Visi</h4>
                     <p class="text-lg text-center">
-                        Visi kami adalah menjadi pemimpin pasar dalam industri ini, menawarkan solusi yang relevan dan berkelanjutan 
-                        untuk setiap pelanggan, serta berperan aktif dalam pembangunan sosial dan ekonomi.
+                    Menjadi UMKM yang terdepan dalam memproduksi dan memasarkan camilan tradisional berkualitas tinggi, ramah lingkungan, dan bercita rasa autentik, 
+                    sehingga dapat memperkenalkan budaya kuliner lokal Balikpapan ke tingkat nasional dan internasional.
                     </p>
                 </div>
             </div>
         </div>
-
-        <!-- CTA - Hubungi Kami -->
-        <div class="flex justify-center">
-            <a href="#contact" class="py-4 px-10 bg-gradient-to-r from-purple-600 to-red-600 text-white rounded-lg shadow-lg 
-                transform hover:scale-105 transition duration-300">
-                Hubungi Kami
-            </a>
         </div>
     </div>
 </section>

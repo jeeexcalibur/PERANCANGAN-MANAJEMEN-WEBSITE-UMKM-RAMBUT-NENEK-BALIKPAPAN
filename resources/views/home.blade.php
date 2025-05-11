@@ -121,7 +121,7 @@
 
 <!-- Customer Service Button -->
 <div class="fixed bottom-5 right-5 z-50">
-    <a href="https://wa.me/6281549216635" target="_blank" class="bg-gradient-to-r from-green-400 to-green-600 text-white p-4 rounded-full shadow-lg hover:scale-105 transform transition duration-300 focus:outline-none">
+    <a href="https://wa.me/6285787716285" target="_blank" class="bg-gradient-to-r from-green-400 to-green-600 text-white p-4 rounded-full shadow-lg hover:scale-105 transform transition duration-300 focus:outline-none">
         <i class="fab fa-whatsapp text-2xl"></i>
     </a>
 </div>
